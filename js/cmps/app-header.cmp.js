@@ -5,7 +5,7 @@ export default {
         <nav>
             <ul class="main-nav" :class="menuOpen" @click="toggleMenu">
                 <li><router-link to="/" exact>Home</router-link></li>
-                <li><router-link to="/mail">Mail</router-link></li>
+                <li><router-link to="/email">Mail</router-link></li>
                 <li><router-link to="/keep">Keep</router-link></li>
                 <!-- <li><router-link to="/book">Books</router-link></li> -->
                 <li><router-link to="/about">About</router-link></li>
