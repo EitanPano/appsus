@@ -1,0 +1,23 @@
+/* helpers */
+
+.app-main {
+    margin-top: 10vh;
+    min-height: 80vh;
+}
+
+/* flex */
+
+.flex {
+    display: flex;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+/* text */
+
+.text-left {
+    text-align: left;
+}
+
