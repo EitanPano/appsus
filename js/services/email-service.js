@@ -21,7 +21,7 @@ function query() {
 }
 
 function getById(emailId) {
-    return storageService.get(EMAILS_KEYS, emailId);
+    return storageService.get(EMAILS_KEY, emailId);
 }
 
 function sendEmail(newEmail) {
