@@ -3,6 +3,8 @@ export default {
         <section class="home-page app-main">
             <h3>KEEP APP...</h3>
             <h3>KEEP APP...</h3>
+            <h3>Eitans push APP...</h3>
+
         </section>
     `
 }
