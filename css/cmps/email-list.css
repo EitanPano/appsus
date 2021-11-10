@@ -1,0 +1,17 @@
+.email-list {
+    padding-left: 16em;
+    max-width: 100%;
+    flex-grow: 1;
+}
+
+.email-list li {
+    border-bottom: 1px solid #000;
+    background-color: #fff;
+    padding: 1em;
+}
+
+.email-list li:hover {
+    background-color: gainsboro;
+    cursor: pointer;
+}
+

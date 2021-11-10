@@ -6,8 +6,7 @@ export default {
         emailPreview
     },
     template:`
-        <main>
-            <h3>EMAIL LIST...</h3>
+        <main class="email-list">
             <p>unread: {{ showUnreadCount }}</p>
             <ul>
                 <template v-for="email in emails">

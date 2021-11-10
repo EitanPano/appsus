@@ -1,5 +1,7 @@
-@import './cmps/app-header.css';
 @import './parts/helpers.css';
+@import './cmps/app-header.css';
+@import './apps/email-app.css';
+
 
 
 * {
