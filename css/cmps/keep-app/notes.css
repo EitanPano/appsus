@@ -1,0 +1,14 @@
+.note {
+    width: 15rem;
+    background-color: cornflowerblue;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.note img {
+    width: 13rem;
+    margin-block-end: 1rem;
+}
