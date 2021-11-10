@@ -1,0 +1,9 @@
+.email-folder-list {
+    /* display: inline-block; */
+    height: 100vh;
+    width: 16em;
+    background-color: white;
+    position: fixed;
+    border-right: 2px solid gainsboro;
+    box-shadow: 3px 0 10px 0 rgba(0, 0, 0, 0.35);
+}

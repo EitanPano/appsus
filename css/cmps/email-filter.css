@@ -1,0 +1,28 @@
+.email-filter {
+    display: flex;
+    top: 3vh;
+    left: calc(50% - 10em);
+    z-index: 150;
+    width: 20em;
+    position: fixed;
+}
+
+.email-filter input:focus {
+    box-shadow: none;
+}
+
+.email-filter label {
+    /* position: absolute; */
+    background-color: white;
+    padding: 0 1em;
+    position: fixed;
+    border-radius: 0.5em;
+}
+
+.email-filter input {
+    padding-left: 1em;
+    width: 20em;
+    height: 2.5em;
+    margin: 0;
+    box-shadow: none ;
+}
