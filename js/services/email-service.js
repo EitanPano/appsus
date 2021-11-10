@@ -13,7 +13,8 @@ export const emailService = {
     loggedinUser,
     query,
     getById,
-    sendEmail
+    sendEmail,
+    removeEmail
 };
 
 function query() {
@@ -29,6 +30,10 @@ function sendEmail(newEmail) {
     newEmail.isRead = false;
     return storageService.post(EMAILS_KEY, newEmail)
     .then(query);
+}
+
+function removeEmail(emailId) {
+    return storageService.remove(EMAILS_KEY, emailId);
 }
 
 function _createEmails() {

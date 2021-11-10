@@ -5,27 +5,26 @@ import emailFolderList from '../cmps/email-folder-list.cmp.js';
 import emailList from '../cmps/email-list.cmp.js';
 import emailCompose from '../cmps/email-compose.cmp.js';
 
-
 export default {
     name: 'emailApp',
     components: {
         emailList,
         emailFolderList,
         emailFilter,
-        emailCompose
+        emailCompose,
     },
     template: `
         <section class="email-app app-main">
             <email-filter />
             <email-folder-list @compose="isCompose = !isCompose" />
-            <email-list v-if="emails" :emails="emails" />
+            <email-list @removed="removeEmail" v-if="emails" :emails="emails" />
             <email-compose v-if="isCompose" @sent="sendEmail" @closed="isCompose = false" />
         </section>
     `,
     data() {
         return {
             emails: null,
-            isCompose: false
+            isCompose: false,
         };
     },
     created() {
@@ -36,8 +35,16 @@ export default {
             emailService.query().then((emails) => (this.emails = emails));
         },
         sendEmail(newEmail) {
-            emailService.sendEmail(newEmail)
-                .then(emails => this.emails = emails);
-        }
+            emailService
+                .sendEmail(newEmail)
+                .then((emails) => (this.emails = emails));
+        },
+        removeEmail(emailId) {
+            emailService.removeEmail(emailId)
+                .then(() => {
+                    this.emails = this.emails.filter(email => email.id !== emailId)
+                })
+            console.log(emailId);
+        },
     },
 };

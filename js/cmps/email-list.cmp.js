@@ -3,14 +3,14 @@ import emailPreview from './email-preview.cmp.js';
 export default {
     props: ['emails'],
     components: {
-        emailPreview
+        emailPreview,
     },
-    template:`
+    template: `
         <main class="email-list">
-            <p>unread: {{ showUnreadCount }}</p>
+            <p>Unread: {{ showUnreadCount }}</p>
             <ul>
                 <template v-for="email in emails">
-                    <email-preview :email="email" />
+                    <email-preview @removed="$emit('removed', $event)" :email="email" />
                 </template>
             </ul>
 
@@ -18,19 +18,24 @@ export default {
     `,
     data() {
         return {
-            unreadCount: 0
-        }
+            unreadCount: null,
+        };
     },
     created() {
         console.log(this.emails);
     },
+    methods: {
+
+    },
     computed: {
         showUnreadCount() {
-            // const emails = this.emails
             const count = this.emails.reduce((acc, email) => {
-                return (!email.isRead) ? acc + 1 : acc}, 0)
-                console.log(count);
-            return count
-        }
-    }
-}
+                return !email.isRead ? acc + 1 : acc;
+            }, 0);
+            return count;
+        },
+        showTools() {
+            return console.log('hover');
+        },
+    },
+};
