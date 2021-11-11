@@ -4,10 +4,10 @@ const noteTxt = {
     template: `
         <div class="note note-txt">
             <h4>
-                {{data.title}}
+                {{data.info.title}}
             </h4>
             <p>
-                {{data.txt}}
+                {{data.info.txt}}
             </p>
         </div>
     `,
@@ -24,12 +24,12 @@ const noteImg = {
     props: ['data'],
     template: `
         <div class="note note-img">
-            <img :src= "data.url">
+            <img :src= "data.info.url">
             <h4>
-                {{data.title}}
+                {{data.info.title}}
             </h4>
             <p>
-                {{data.txt}}
+                {{data.info.txt}}
             </p> 
         </div>
     `
@@ -39,15 +39,28 @@ const noteTodos = {
     template: `
         <div class="note note-todos">
             <h4>
-                {{data.title}}
+                {{data.info.title}}
             </h4>
             <ul>
-                <li v-for="todo in data.todos">
-                {{todo.txt}}
+                <li v-for="(todo,idx) in data.info.todos">
+                <input type="checkbox" :id="'todo-'+data.id+'-'+idx" :checked="todo.isCompleted" @click="onToggleCompleted(todo)">
+                <label :for="'todo-'+data.id+'-'+idx" :class="{'line-through': todo.isCompleted}" v-if=""> {{todo.txt }}</label>
+                
                 </li>
             </ul>
         </div>
-    `
+    `,
+    data() {
+        return {
+
+        }
+    },
+    methods: {
+        onToggleCompleted(todo) {
+            todo.isCompleted = !todo.isCompleted;
+        }
+    },
+    
 };
 
 
@@ -63,7 +76,7 @@ export default {
         <div >
             <component 
                         :is="note.type" 
-                        :data="note.info" 
+                        :data="note" 
                         >
             </component>
         </div>
@@ -72,6 +85,9 @@ export default {
     `,
     created() {
         
+    },
+    computed: {
+       
     }
   
 }

@@ -87,10 +87,7 @@ function getEmptyNote(type = 'noteTxt') {
             isPinned: false,
             info: {
                 title: "",
-                todos: [
-                    { txt: "", doneAt: null },
-                    { txt: "", doneAt: 187111111 }
-                ]
+                todos: []
             },
             labels: [],
             style: {
@@ -137,8 +134,8 @@ function _createNotes() {
                 info: {
                     title: "I am type todos",
                     todos: [
-                        { txt: "Driving liscence", doneAt: null },
-                        { txt: "Coding power", doneAt: 187111111 }
+                        { txt: "Driving liscence", isCompleted: false },
+                        { txt: "Coding power", isCompleted: true }
                     ]
                 },
                 labels: ["important"],

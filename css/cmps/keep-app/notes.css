@@ -13,3 +13,7 @@
     margin-block-end: 1rem;
     align-self: center;
 }
+
+.line-through {
+    text-decoration: line-through;
+}
