@@ -10,17 +10,23 @@ export default {
     },
     template:`
         <section class="keep-app app-main">
-            <h3>KEEP APP...</h3>
-            <keep-add  />
             
-            <keep-list :notes="notes" @remove="removeNote" @color="changeNoteBgc"/>
+            <keep-add  @add="addNote"/>
+            <section class="pinned-notes" v-if="pinnedNotes.length>0">
+                <h3>Pinned Notes:</h3>  
+                <keep-list :notes="pinnedNotes"  @remove="removeNote" @color="changeNoteBgc" @pin="togglePin" />
+            </section>
+            <section class="unpinned-notes">
+                <h3>Notes:</h3>  
+                <keep-list :notes="unpinnedNotes"  @remove="removeNote" @color="changeNoteBgc" @pin="togglePin" />
+            </section>
         </section>
     `,
      data() {
         return {
-            notes: null,
+            notes: [],
             filterBy: null,
-            noteToEdit: null
+            
         };
     },
     created() {
@@ -40,6 +46,7 @@ export default {
                     // };
                     // eventBus.$emit('showMsg', msg);
                     this.notes = this.notes.filter(note => note.id !== id)
+                    
                 })
                 .catch(err => {
                     console.log('err', err);
@@ -54,15 +61,23 @@ export default {
             this.filterBy = filterBy;
         },
         changeNoteBgc(noteId, color) {
-            keepService.getById(noteId)
-                .then(note => {
-                    note.style.backgroundColor = color
-                    console.log(note);
-                    keepService.save(note)
-                    .then(note => this.$router.go());
+            keepService.changeColor(noteId, color)
+                .then(updatedNote => {
+                    this.notes = this.notes.map(note => note.id === noteId ? updatedNote : note)
                 })
-            
-                
+               
+        },
+        addNote(newNote) {
+            keepService.save(newNote)
+                .then(note => this.notes.push(note));
+        },
+        togglePin(noteId) {
+            keepService.togglePin(noteId)
+                .then(updatedNote => {
+                    this.notes = this.notes.filter(note => note.id !== noteId)
+                    this.notes.unshift(updatedNote);
+                })
+               
         }
     },
     computed: {
@@ -73,7 +88,14 @@ export default {
                 return note.info.title.toLowerCase().includes(searchStr)
             });
             return notesToShow;
+        },
+        pinnedNotes() {
+            return this.notes.filter(note => note.isPinned)
+        },
+        unpinnedNotes() {
+            return this.notes.filter(note => !note.isPinned)
         }
-    }
+    },
+   
     
 };
