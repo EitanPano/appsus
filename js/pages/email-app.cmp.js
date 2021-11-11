@@ -54,6 +54,7 @@ export default {
         },
         setFilter(filterBy) {
             this.filterBy = filterBy;
+            // this.filterBy.status = 'inbox'
             console.log(this.filterBy);
         },
     },

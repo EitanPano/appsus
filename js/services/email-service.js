@@ -15,11 +15,16 @@ export const emailService = {
     getById,
     sendEmail,
     removeEmail,
-    toggleRead
+    toggleRead,
 };
 
-function query() {
-    return storageService.query(EMAILS_KEY);
+function query(filterBy = null) {
+    return storageService.query(EMAILS_KEY).then((mails) => {
+        if (!filterBy) return mails;
+        return mails.filter((mail) => {
+            return;
+        });
+    });
 }
 
 function getById(emailId) {
@@ -29,17 +34,15 @@ function getById(emailId) {
 function sendEmail(newEmail) {
     newEmail.id = utilService.makeId();
     newEmail.isRead = false;
-    newEmail.sentAt = Date.now()
-    return storageService.post(EMAILS_KEY, newEmail)
-    .then(query);
+    newEmail.sentAt = Date.now();
+    return storageService.post(EMAILS_KEY, newEmail).then(query);
 }
 
 function toggleRead(emailId, isRead) {
-	return getById(emailId)
-		.then(email => {
-			email.isRead = isRead;
-			return storageService.put(EMAILS_KEY, email)
-		})
+    return getById(emailId).then((email) => {
+        email.isRead = isRead;
+        return storageService.put(EMAILS_KEY, email);
+    });
 }
 
 function removeEmail(emailId) {
