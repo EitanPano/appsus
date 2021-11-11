@@ -11,13 +11,13 @@ export const keepService = {
     save,
     getEmptyNote,
     getById,
-    add
+    
 };
 
 function query(filterBy = {}) {
     return storageService.query(KEEP_KEY)
         .then(notes => {
-            if (filterBy.topNotes) {
+            if (filterBy.Notes) {
                 notes = notes.slice(0, 2);
             }
             return notes;
@@ -29,8 +29,14 @@ function remove(noteId) {
     return storageService.remove(KEEP_KEY, noteId);
 }
 
-function add(note) {
-
+function changeColor(noteId) {
+    return storageService.query(KEEP_KEY)
+        .then(notes => {
+            if (filterBy.topNotes) {
+                notes = notes.slice(0, 2);
+            }
+            return notes;
+        });
 }
 
 function save(note) {
@@ -62,7 +68,7 @@ function getEmptyNote(type = 'noteTxt') {
             },
             labels: [],
             style: {
-                backgroundColor: "#00d"
+                backgroundColor: "#a2a2d6"
             }
         };
     else if (type === 'noteImg')
@@ -77,7 +83,7 @@ function getEmptyNote(type = 'noteTxt') {
             },
             labels: [],
             style: {
-                backgroundColor: "#00d"
+                backgroundColor: "#a2a2d6"
             }
         };
     else if (type === 'noteTodos')
@@ -91,7 +97,7 @@ function getEmptyNote(type = 'noteTxt') {
             },
             labels: [],
             style: {
-                backgroundColor: "#00d"
+                backgroundColor: "#a2a2d6"
             }
         }
 }
@@ -110,7 +116,7 @@ function _createNotes() {
                 },
                 labels: ["later", "important"],
                 style: {
-                    backgroundColor: "#00d"
+                    backgroundColor: "#a2a2d6"
                 }
             },
             {
@@ -124,7 +130,7 @@ function _createNotes() {
                 },
                 labels: ["inspo"],
                 style: {
-                    backgroundColor: "#00d"
+                    backgroundColor: "#a2a2d6"
                 }
             },
             {
@@ -140,7 +146,7 @@ function _createNotes() {
                 },
                 labels: ["important"],
                 style: {
-                    backgroundColor: "#00d"
+                    backgroundColor: "#a2a2d6"
                 }
             }
         ];

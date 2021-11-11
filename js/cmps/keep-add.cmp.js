@@ -47,7 +47,7 @@ export default {
         },
         save() {
             keepService.save(this.note)
-                .then(car => this.$router.go());
+                .then(note => this.$router.go());
         },
         addTask(){
             if(this.todoTxt === '') return;

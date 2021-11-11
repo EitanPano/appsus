@@ -13,13 +13,14 @@ export default {
             <h3>KEEP APP...</h3>
             <keep-add  />
             
-            <keep-list :notes="notes" @remove="removeNote"/>
+            <keep-list :notes="notes" @remove="removeNote" @color="changeNoteBgc"/>
         </section>
     `,
      data() {
         return {
             notes: null,
-            filterBy: null
+            filterBy: null,
+            noteToEdit: null
         };
     },
     created() {
@@ -51,6 +52,17 @@ export default {
         },
         setFilter(filterBy) {
             this.filterBy = filterBy;
+        },
+        changeNoteBgc(noteId, color) {
+            keepService.getById(noteId)
+                .then(note => {
+                    note.style.backgroundColor = color
+                    console.log(note);
+                    keepService.save(note)
+                    .then(note => this.$router.go());
+                })
+            
+                
         }
     },
     computed: {
