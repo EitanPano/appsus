@@ -16,15 +16,21 @@ export default {
     template: `
         <section class="email-app app-main">
             <email-filter @changed="setFilter" />
-            <email-folder-list @compose="isCompose = !isCompose" />
-            <email-list @toggleRead="toggleRead" @removed="removeEmail" v-if="emails" :emails="emailsToShow" />
+            <email-folder-list @setStatus="setStatus" @compose="isCompose = !isCompose" />
+            <email-list @toggleRead="toggleRead" @removed="removeEmail" v-if="emails" :emails="emails" />
             <email-compose v-if="isCompose" @sent="sendEmail" @closed="isCompose = false" />
         </section>
     `,
     data() {
         return {
             emails: null,
-            filterBy: null,
+            filterBy: {
+                status: 'inbox',
+                searchStr: '',
+                isRead: 'all',
+                isStared: false,
+                lables: [],
+            },
             isCompose: false,
         };
     },
@@ -33,13 +39,13 @@ export default {
     },
     methods: {
         loadEmails() {
-            emailService.query().then((emails) => (this.emails = emails));
-            
+            emailService.query(this.filterBy).then((emails) => {
+                this.emails = emails;
+            });
         },
         toggleRead(emailId, isRead) {
             console.log(emailId, isRead);
-            emailService.toggleRead(emailId, isRead)
-                .then(this.loadEmails)
+            emailService.toggleRead(emailId, isRead).then(this.loadEmails);
         },
         sendEmail(newEmail) {
             emailService
@@ -47,37 +53,38 @@ export default {
                 .then((emails) => (this.emails = emails));
         },
         removeEmail(emailId) {
-            emailService.removeEmail(emailId)
-                .then(() => {
-                    this.emails = this.emails.filter(email => email.id !== emailId)
-                })
+            emailService.removeEmail(emailId).then(() => {
+                this.emails = this.emails.filter(
+                    (email) => email.id !== emailId
+                );
+            });
             console.log(emailId);
         },
-        setFilter(filterBy) {
-            this.filterBy = filterBy;
-            // this.filterBy.status = 'inbox'
-            console.log(this.filterBy);
+        setFilter({searchStr,isRead}) {
+            this.filterBy = {...this.filterBy,searchStr,isRead};
+            this.loadEmails()
+        },
+        setStatus(status) {
+            console.log('status from cmp',status);
+                this.filterBy.status = status;
+                this.loadEmails();
+            // }
         },
     },
     computed: {
-        emailsToShow() {
-            if (!this.filterBy) return this.emails;
-
-            let emailsToShow = this.emails
-			if (this.filterBy.status !== 'all') {
-				let isRead = (this.filterBy.status === 'read') ? true : false;
-				emailsToShow = emailsToShow.filter(email => email.isRead === isRead)
-			}
-			if (this.filterBy.searchStr) {
-				let searchStr = this.filterBy.searchStr.toLowerCase()
-				emailsToShow = emailsToShow.filter(email => {
-					return (
-						email.subject.toLowerCase().includes(searchStr) ||
-						email.body.toLowerCase().includes(searchStr)
-					)
-				})
-			}
-            return emailsToShow;
-        },
-    }
+        // emailsToShow() {
+        //     if (!this.filterBy) return this.emails;
+        //     let emailsToShow = this.emails;
+        //     if (this.filterBy.searchStr) {
+        //         let searchStr = this.filterBy.searchStr.toLowerCase();
+        //         emailsToShow = emailsToShow.filter((email) => {
+        //             return (
+        //                 email.subject.toLowerCase().includes(searchStr) ||
+        //                 email.body.toLowerCase().includes(searchStr)
+        //             );
+        //         });
+        //     }
+        //     return emailsToShow;
+        // },
+    },
 };
