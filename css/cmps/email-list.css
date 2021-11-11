@@ -8,6 +8,11 @@
     border-bottom: 1px solid #000;
     background-color: #fff;
     padding: 1em;
+    position: relative;
+}
+
+.email-list li.read {
+    background-color: rgb(200, 200, 200);
 }
 
 .email-list li:hover {
