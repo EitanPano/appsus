@@ -1,0 +1,10 @@
+.keep-list {
+    margin: auto;
+    width: 900px;
+}
+
+.note-list-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+
+}
