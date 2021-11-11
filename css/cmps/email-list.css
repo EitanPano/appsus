@@ -7,11 +7,13 @@
 .email-list li {
     border-bottom: 1px solid #000;
     background-color: #fff;
-    padding: 1em;
+
     position: relative;
+    /* overflow: hidden; */
 }
 
 .email-list li.read {
+    height: em;
     background-color: rgb(200, 200, 200);
 }
 
@@ -19,4 +21,34 @@
     background-color: gainsboro;
     cursor: pointer;
 }
+
+.email-list li>a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3em;
+    padding: 0.5em 1em;
+    font-size: 0.95em;
+    overflow: hidden;
+}
+
+.email-list button {
+    padding: 0.5em;
+    border-radius: 50%;
+    border: none;
+}
+
+.email-list .fa, .email-list .far {
+    font-size: 20px;
+}
+
+.email-list .from , .email-list .subject{
+    font-weight: bold;
+}
+
+.email-list p {
+    /* max-height: 1em; */
+    margin: 0;
+}
+
 
