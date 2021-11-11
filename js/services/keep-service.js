@@ -10,7 +10,8 @@ export const keepService = {
     remove,
     save,
     getEmptyNote,
-    getById
+    getById,
+    add
 };
 
 function query(filterBy = {}) {
@@ -26,6 +27,10 @@ function query(filterBy = {}) {
 function remove(noteId) {
     // return Promise.reject('Big balagan!')
     return storageService.remove(KEEP_KEY, noteId);
+}
+
+function add(note) {
+
 }
 
 function save(note) {
@@ -45,11 +50,53 @@ function getNextNoteId(noteId) {
         });
 }
 
-function getEmptyNote() {
-    return {
-        id: ''
-
-    };
+function getEmptyNote(type = 'noteTxt') {
+    if (type === 'noteTxt')
+        return {
+            id: '',
+            type: "noteTxt",
+            isPinned: true,
+            info: {
+                title: "",
+                txt: ""
+            },
+            labels: [],
+            style: {
+                backgroundColor: "#00d"
+            }
+        };
+    else if (type === 'noteImg')
+        return {
+            id: '',
+            type: "noteImg",
+            isPinned: false,
+            info: {
+                url: "",
+                title: "",
+                txt: ""
+            },
+            labels: [],
+            style: {
+                backgroundColor: "#00d"
+            }
+        };
+    else if (type === 'noteTodos')
+        return {
+            id: "",
+            type: "noteTodos",
+            isPinned: false,
+            info: {
+                title: "",
+                todos: [
+                    { txt: "", doneAt: null },
+                    { txt: "", doneAt: 187111111 }
+                ]
+            },
+            labels: [],
+            style: {
+                backgroundColor: "#00d"
+            }
+        }
 }
 
 function _createNotes() {

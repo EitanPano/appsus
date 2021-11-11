@@ -8,9 +8,9 @@ export default {
     },
     props: ['notes'],
     template:`
-        <section class="keep-list app-main">
+        <section class="keep-list">
             <h3>KEEP list...</h3>
-            <ul>
+            <ul class="note-list-container flex">
             <li v-for="note in notes" :key="note.id" class="note-preview-container" >
                 <keep-preview :note="note" />
                 

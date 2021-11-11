@@ -1,16 +1,19 @@
 import { keepService } from '../services/keep-service.js';
 import keepList from '../cmps/keep-list.cmp.js';
+import keepAdd from '../cmps/keep-add.cmp.js';
 
 
 export default {
     components: {
-        keepList
+        keepList,
+        keepAdd
     },
     template:`
         <section class="keep-app app-main">
             <h3>KEEP APP...</h3>
+            <keep-add  />
+            
             <keep-list :notes="notes" @remove="removeNote"/>
-
         </section>
     `,
      data() {
