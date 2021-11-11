@@ -25,11 +25,10 @@ export default {
                         <input v-for="todo in note.info.todos" type="text" :value="todo.txt" @keyup.enter="addTask" placeholder="New task">
                 </div>
             </div>
-            <button @click="save">+</button>
+            <button @click="add">+</button>
             <button @click="getNote('noteTxt')">noteTxt</button>
             <button @click="getNote('noteImg')">noteImg</button>
             <button @click="getNote('noteTodos')">noteTodos</button>
-
         </section>
     `,
     data() {
@@ -45,9 +44,8 @@ export default {
         getNote(type) {
             this.note = keepService.getEmptyNote(type)
         },
-        save() {
-            keepService.save(this.note)
-                .then(note => this.$router.go());
+        add() {
+           this.$emit('add', this.note);
         },
         addTask(){
             if(this.todoTxt === '') return;
@@ -56,8 +54,6 @@ export default {
                 isCompleted: false
             })
             this.todoTxt = ''
-        }
-   
-
-    },
+        },
+    }
 }
