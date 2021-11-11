@@ -14,10 +14,16 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    border-radius: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
     padding: 1rem;
     text-align: start;
+    transition-duration: 0.218s;
 }
+.note-preview-container:hover {
+
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302),0 1px 3px 1px rgba(60,64,67,0.149);
+} 
 
 .note img {
     width: 13rem;
