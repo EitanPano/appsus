@@ -9,14 +9,15 @@ export default {
     props: ['notes'],
     template:`
         <section class="keep-list">
-          
+            
             <ul class="note-list-container flex">
-            <li v-for="note in notes" :key="note.id" class="note-preview-container" :style="{'background-color': note.style.backgroundColor}">
+            <li v-for="(note,idx) in notes" :key="note.id" class="note-preview-container" :style="{'background-color': note.style.backgroundColor}"  @mouseover="hoveredNoteIdx = idx" @mouseout="hoveredNoteIdx = -1">
                 <keep-preview :note="note" />
                 
-                <div class="actions">
-                    <button @click="remove(note.id)" >X</button>
-                    <!-- <input type="color" name="noteBgc" @change="color(note.id)"> -->
+                <div class="actions" v-show="idx === hoveredNoteIdx">
+                    
+                    <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"></i>
+                    <i title="Delete note" class="far fa-trash-alt" @click="remove(note.id)"></i>
                     <i title="Change note color" class="fas fa-palette info colors dropdown">
                     <div class="dropdown-content">
                     <span @click="color(note.id, $event)" class="" style="background-color: #ffffff;"> &nbsp; </span>
@@ -43,9 +44,12 @@ export default {
     `,
      data() {
         return {
-            
+            hoveredNoteIdx: -1
            
         };
+    },
+    computed: {
+        
     },
     methods: {
         remove(noteId) {
@@ -54,6 +58,9 @@ export default {
         color(noteId, e){
             const color = e.srcElement.style.backgroundColor;
             this.$emit('color', noteId, color)
-        }
+        },
+        pin(noteId) {
+            this.$emit('pin', noteId);
+        },
     },
 }
