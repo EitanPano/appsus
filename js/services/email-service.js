@@ -22,7 +22,7 @@ function query(filterBy = null) {
     return storageService.query(EMAILS_KEY).then((mails) => {
         if (!filterBy) return mails;
         return mails.filter((mail) => {
-            return;
+            return mail
         });
     });
 }

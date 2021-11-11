@@ -34,6 +34,7 @@ export default {
     methods: {
         loadEmails() {
             emailService.query().then((emails) => (this.emails = emails));
+            
         },
         toggleRead(emailId, isRead) {
             console.log(emailId, isRead);
