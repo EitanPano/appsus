@@ -1,6 +1,17 @@
-.note {
+.keep-list {
+    margin: auto;
+    width: 900px;
+}
+
+.note-list-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+
+}
+
+.note-preview-container {
     width: 15rem;
-    background-color: cornflowerblue;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
