@@ -14,7 +14,8 @@ export const emailService = {
     query,
     getById,
     sendEmail,
-    removeEmail
+    removeEmail,
+    toggleRead
 };
 
 function query() {
@@ -28,8 +29,17 @@ function getById(emailId) {
 function sendEmail(newEmail) {
     newEmail.id = utilService.makeId();
     newEmail.isRead = false;
+    newEmail.sentAt = Date.now()
     return storageService.post(EMAILS_KEY, newEmail)
     .then(query);
+}
+
+function toggleRead(emailId, isRead) {
+	return getById(emailId)
+		.then(email => {
+			email.isRead = isRead;
+			return storageService.put(EMAILS_KEY, email)
+		})
 }
 
 function removeEmail(emailId) {
@@ -48,16 +58,16 @@ function _createEmails() {
             subject: 'Hello Mr.Someone',
             body: 'Please contribute to our nigerian prince',
             isRead: false,
-            sentAt: 1551133930594,
+            sentAt: 1159139990594,
         },
         {
             id: utilService.makeId(),
             from: 'Shira Mualemz',
             to: 'momo@momo.com',
-            subject: 'Hello Mr.Someone',
+            subject: 'Would you like to buy our product?',
             body: "Your subscription has ended, please notice you won't be able to use our services from now on.",
             isRead: true,
-            sentAt: 1551133930594,
+            sentAt: 1551195130594,
         },
         {
             id: utilService.makeId(),
@@ -66,7 +76,7 @@ function _createEmails() {
             subject: 'Hello Poopybutt',
             body: 'You may wipe better in order to not really change the subject',
             isRead: false,
-            sentAt: 1551133930594,
+            sentAt: 1544441250594,
         },
     ];
     utilService.saveToStorage(EMAILS_KEY, emails);
