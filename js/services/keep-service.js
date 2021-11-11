@@ -11,6 +11,8 @@ export const keepService = {
     save,
     getEmptyNote,
     getById,
+    changeColor,
+    togglePin
     
 };
 
@@ -29,14 +31,21 @@ function remove(noteId) {
     return storageService.remove(KEEP_KEY, noteId);
 }
 
-function changeColor(noteId) {
-    return storageService.query(KEEP_KEY)
-        .then(notes => {
-            if (filterBy.topNotes) {
-                notes = notes.slice(0, 2);
-            }
-            return notes;
+function changeColor(noteId, color) {
+    return getById(noteId)
+        .then(note => {
+            note.style.backgroundColor = color
+            return storageService.put(KEEP_KEY, note);
+            return query()
         });
+}
+
+
+function togglePin(noteId) {
+    return getById(noteId).then(note => {
+        note.isPinned = !note.isPinned;
+        return keepService.save(note)
+    })     
 }
 
 function save(note) {
@@ -68,7 +77,7 @@ function getEmptyNote(type = 'noteTxt') {
             },
             labels: [],
             style: {
-                backgroundColor: "#a2a2d6"
+                backgroundColor: "#fff"
             }
         };
     else if (type === 'noteImg')
@@ -83,7 +92,7 @@ function getEmptyNote(type = 'noteTxt') {
             },
             labels: [],
             style: {
-                backgroundColor: "#a2a2d6"
+                backgroundColor: "#fff"
             }
         };
     else if (type === 'noteTodos')
@@ -97,7 +106,7 @@ function getEmptyNote(type = 'noteTxt') {
             },
             labels: [],
             style: {
-                backgroundColor: "#a2a2d6"
+                backgroundColor: "#fff"
             }
         }
 }
@@ -116,7 +125,7 @@ function _createNotes() {
                 },
                 labels: ["later", "important"],
                 style: {
-                    backgroundColor: "#a2a2d6"
+                    backgroundColor: "#aecbfa"
                 }
             },
             {
@@ -130,7 +139,7 @@ function _createNotes() {
                 },
                 labels: ["inspo"],
                 style: {
-                    backgroundColor: "#a2a2d6"
+                    backgroundColor: "#fbbc04"
                 }
             },
             {
@@ -146,11 +155,10 @@ function _createNotes() {
                 },
                 labels: ["important"],
                 style: {
-                    backgroundColor: "#a2a2d6"
+                    backgroundColor: "#f28b82"
                 }
             }
         ];
-
         utilService.saveToStorage(KEEP_KEY, notes);
     }
     return notes;
