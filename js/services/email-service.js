@@ -2,7 +2,7 @@ import { utilService } from './util-service.js';
 import { storageService } from './async-storage-service.js';
 
 const loggedinUser = {
-    email: 'user@appsus.com',
+    email: 'momo@momo.com',
     fullname: 'Mahatma Appsus',
 };
 
@@ -20,9 +20,17 @@ export const emailService = {
 
 function query(filterBy = null) {
     return storageService.query(EMAILS_KEY).then((mails) => {
+        let searchStr = filterBy.searchStr.toLowerCase();
         if (!filterBy) return mails;
+        if (filterBy.isRead !== 'all') {
+            let isRead = filterBy.isRead === 'read' ? true : false;
+            mails = mails.filter((email) => email.isRead === isRead
+            );}
         return mails.filter((mail) => {
-            return mail
+            return (
+                mail.status === filterBy.status && (mail.subject.toLowerCase().includes(searchStr) ||
+                mail.body.toLowerCase().includes(searchStr))
+            );
         });
     });
 }
@@ -60,8 +68,9 @@ function _createEmails() {
             to: 'momo@momo.com',
             subject: 'Hello Mr.Someone',
             body: 'Please contribute to our nigerian prince',
-            isRead: false,
             sentAt: 1159139990594,
+            isRead: false,
+            status: 'inbox',
         },
         {
             id: utilService.makeId(),
@@ -69,8 +78,9 @@ function _createEmails() {
             to: 'momo@momo.com',
             subject: 'Would you like to buy our product?',
             body: "Your subscription has ended, please notice you won't be able to use our services from now on.",
-            isRead: true,
             sentAt: 1551195130594,
+            isRead: true,
+            status: 'inbox',
         },
         {
             id: utilService.makeId(),
@@ -78,8 +88,9 @@ function _createEmails() {
             to: 'momo@momo.com',
             subject: 'Hello Poopybutt',
             body: 'You may wipe better in order to not really change the subject',
-            isRead: false,
             sentAt: 1544441250594,
+            isRead: false,
+            status: 'starred',
         },
     ];
     utilService.saveToStorage(EMAILS_KEY, emails);

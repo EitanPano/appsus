@@ -6,7 +6,13 @@ export default {
                 <p class="plus">+</p>
                 <p>Compose</p>
             </div>
-            <h3>EMAIL ASIDE...</h3>
+            <p @click="$emit('setStatus', 'inbox')">Inbox</p>
+            <p @click="$emit('setStatus', 'starred')">Starred</p>
+            <p @click="$emit('setStatus', 'sent')">Sent</p>
+            <p @click="$emit('setStatus', 'trash')">Trash</p>
         </aside>
     `,
+    methods: {
+
+    }
 };
