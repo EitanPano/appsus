@@ -1,15 +1,19 @@
 import { emailService } from '../services/email-service.js';
 import { eventBus } from '../services/event-bus-service.js';
+
 export default {
     template:`
-        <main class="app-main">
-        <router-link class="back-to" to="/email"><< Back</router-link>
-            <h3>EMAIL DETAILS...</h3>
-            <p>Senders name</p>
-                <p>Senders Main Subject</p>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem architecto, nostrum voluptas dolores velit veniam. Alias expedita ea nostrum facere iure magni hic excepturi tempore!
-                </p>
+        <main v-if="email" class="app-main email-details">
+            <div>
+                <router-link class="back-to" to="/email">
+                <i class="fas fa-long-arrow-alt-left"></i>
+                &nbspBack</router-link>
+                <h3 class="subject">{{ email.subject }}</h3>
+                <p class="from">{{ email.from}}</p>
+                <p class="body">{{ email.body }}</p>
+                <hr>
+                <img class="img" v-if="email.img" :src="email.img" alt="">
+            </div>
         </main>
     `,
     data() {
@@ -18,11 +22,14 @@ export default {
         }
     },
      created() {
-        const { emailId } = this.$route.params;
+        const  emailId  = this.$route.params;
+        // console.log(emailId.id);
+        emailService.getById(emailId.id).then((email) => {
+            this.email = email
+        });
         eventBus.$on('setStatus',(status)=>{
             this.$router.push('/email').catch(()=>{})
         })
-        emailService.getById(emailId).then((email) => (this.email = email));
     },
     destroyed(){
         eventBus.$off('mailStatus')

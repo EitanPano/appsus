@@ -16,6 +16,7 @@ export default {
     data() {
         return {
             newEmail: {
+            from: null,
             to: null,
             subject: null,
             body: null,

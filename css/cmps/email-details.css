@@ -1,0 +1,41 @@
+.email-details {
+    margin-left: 16em;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.email-details > div {
+    /* position: absolute; */
+    margin-top: 3em auto;
+    padding: 1em 2em;
+    max-width: calc(768px - 10em);
+    background-color: white;
+}
+
+.email-details .back-to {
+    color: inherit;
+    font-size: 0.9em;
+}
+
+.email-details .subject {
+    font-size: 2em;
+    margin-top: 1em;
+}
+
+.email-details .from {
+    font-weight: bold;
+}
+
+.email-details .body {
+    margin-bottom: 1.5em;
+    line-height: 1.4em;
+}
+
+.email-details img {
+    display: block;
+    text-align: center;
+    margin: 2em auto 0;
+}

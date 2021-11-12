@@ -33,7 +33,8 @@ export default {
             eventBus.$emit('toggleCompose',this.isCompose)
         },
         setStatus(status) {
-            // this.$router.push(`/email/${status}`).catch(()=>{})
+            // not working when first, but if last then vue wont render?
+            // this.$router.push('/email/'+ this.status)
             eventBus.$emit('setStatus',status)
             this.status =  status 
         },
