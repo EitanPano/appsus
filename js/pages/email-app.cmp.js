@@ -17,7 +17,7 @@ export default {
         <section class="email-app app-main">
             <email-filter @changed="setFilter" />
             <email-folder-list @setStatus="setStatus" @compose="isCompose = !isCompose" />
-            <email-list @toggleRead="toggleRead" @removed="removeEmail" v-if="emails" :emails="emails" />
+            <email-list @toggleStarred="toggleStarred" @toggleRead="toggleRead" @removed="removeEmail" v-if="emails" :emails="emails" />
             <email-compose v-if="isCompose" @sent="sendEmail" @closed="isCompose = false" />
         </section>
     `,
@@ -28,7 +28,7 @@ export default {
                 status: 'inbox',
                 searchStr: '',
                 isRead: 'all',
-                isStared: false,
+                isStarred: true,
                 lables: [],
             },
             isCompose: false,
@@ -42,6 +42,12 @@ export default {
             emailService.query(this.filterBy).then((emails) => {
                 this.emails = emails;
             });
+        },
+        toggleStarred(emailId, isStarred) {
+            console.log(emailId, isStarred);
+            emailService
+                .toggleStarred(emailId, isStarred)
+                .then(this.loadEmails);
         },
         toggleRead(emailId, isRead) {
             console.log(emailId, isRead);
@@ -60,18 +66,25 @@ export default {
             });
             console.log(emailId);
         },
-        setFilter({searchStr,isRead}) {
-            this.filterBy = {...this.filterBy,searchStr,isRead};
-            this.loadEmails()
+        setFilter({ searchStr, isRead }) {
+            this.filterBy = { ...this.filterBy, searchStr, isRead };
+            this.loadEmails();
         },
         setStatus(status) {
-            console.log('status from cmp',status);
-                this.filterBy.status = status;
-                this.loadEmails();
+            console.log('status from cmp', status);
+            this.filterBy.status = status;
+            this.loadEmails();
             // }
         },
     },
     computed: {
+        // emailsToShow() {
+        //     // if (!this.emails) return
+        //     if (this.filterBy.status === 'starred') {
+        //         return this.emails.filter((email) => email.isStarred);
+        //     }
+        //     else return this.emails
+        // },
         // emailsToShow() {
         //     if (!this.filterBy) return this.emails;
         //     let emailsToShow = this.emails;

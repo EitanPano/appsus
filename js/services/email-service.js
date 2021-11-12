@@ -16,6 +16,7 @@ export const emailService = {
     sendEmail,
     removeEmail,
     toggleRead,
+    toggleStarred,
 };
 
 function query(filterBy = null) {
@@ -24,12 +25,16 @@ function query(filterBy = null) {
         if (!filterBy) return mails;
         if (filterBy.isRead !== 'all') {
             let isRead = filterBy.isRead === 'read' ? true : false;
-            mails = mails.filter((email) => email.isRead === isRead
-            );}
+            mails = mails.filter((email) => email.isRead === isRead);
+        }
+        if (filterBy.status === 'starred') {
+            return mails.filter((mail) => mail.isStarred);
+        }
         return mails.filter((mail) => {
             return (
-                mail.status === filterBy.status && (mail.subject.toLowerCase().includes(searchStr) ||
-                mail.body.toLowerCase().includes(searchStr))
+                mail.status === filterBy.status &&
+                (mail.subject.toLowerCase().includes(searchStr) ||
+                    mail.body.toLowerCase().includes(searchStr))
             );
         });
     });
@@ -53,6 +58,13 @@ function toggleRead(emailId, isRead) {
     });
 }
 
+function toggleStarred(emailId, isStarred) {
+    return getById(emailId).then((email) => {
+        email.isStarred = isStarred;
+        return storageService.put(EMAILS_KEY, email);
+    });
+}
+
 function removeEmail(emailId) {
     return storageService.remove(EMAILS_KEY, emailId);
 }
@@ -70,6 +82,7 @@ function _createEmails() {
             body: 'Please contribute to our nigerian prince',
             sentAt: 1159139990594,
             isRead: false,
+            isStarred: false,
             status: 'inbox',
         },
         {
@@ -80,6 +93,7 @@ function _createEmails() {
             body: "Your subscription has ended, please notice you won't be able to use our services from now on.",
             sentAt: 1551195130594,
             isRead: true,
+            isStarred: false,
             status: 'inbox',
         },
         {
@@ -90,7 +104,8 @@ function _createEmails() {
             body: 'You may wipe better in order to not really change the subject',
             sentAt: 1544441250594,
             isRead: false,
-            status: 'starred',
+            isStarred: true,
+            status: 'inbox',
         },
     ];
     utilService.saveToStorage(EMAILS_KEY, emails);

@@ -12,7 +12,4 @@ export default {
             <p @click="$emit('setStatus', 'trash')">Trash</p>
         </aside>
     `,
-    methods: {
-
-    }
 };

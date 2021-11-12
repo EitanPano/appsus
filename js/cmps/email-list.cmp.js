@@ -16,7 +16,11 @@ export default {
             </div>
             <ul>
                 <template v-for="email in emails">
-                    <email-preview @toggleRead="toggleRead" @removed="$emit('removed', $event)" :email="email" />
+                    <email-preview
+                        @toggleStarred="toggleStarred"
+                        @toggleRead="toggleRead"
+                        @removed="$emit('removed', $event)"
+                        :email="email" />
                 </template>
             </ul>
 
@@ -29,6 +33,9 @@ export default {
         };
     },
     methods: {
+        toggleStarred(emailId, isStarred) {
+            this.$emit('toggleStarred',emailId, isStarred);
+        },
         toggleRead(emailId, isRead) {
             this.$emit('toggleRead', emailId, isRead);
         },

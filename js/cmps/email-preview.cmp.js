@@ -33,8 +33,7 @@ export default {
         },
         toggleStar() {
             this.isStarred = !this.isStarred;
-            console.log('starred', this.email.id, this.isStarred);
-            this.$emit('starred', this.email.id, this.isStarred);
+            this.$emit('toggleStarred', this.email.id, this.isStarred);
         },
     },
     computed: {
