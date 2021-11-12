@@ -70,7 +70,7 @@ function getEmptyNote(type = 'noteTxt') {
         return {
             id: '',
             type: "noteTxt",
-            isPinned: true,
+            isPinned: false,
             info: {
                 title: "",
                 txt: ""

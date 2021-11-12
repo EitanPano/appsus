@@ -1,0 +1,10 @@
+.keep-edit {
+    background-color: rgb(199, 194, 194);
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 100px;
+    z-index: 2;
+    
+}

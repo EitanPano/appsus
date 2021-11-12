@@ -1,36 +1,96 @@
 .keep-list {
-    margin: auto;
-    width: 900px;
+  margin-inline: 7rem;
 }
 
-.note-list-container {
-    flex-wrap: wrap;
-    gap: 1rem;
+.keep-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
+.note-txt {
+  grid-row: span 2;
+}
+.note-img {
+  grid-row: span 7;
+}
+.note-todos {
+  grid-row: span 3;
 }
 
 .note-preview-container {
-    width: 15rem;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: start;
-    transition-duration: 0.218s;
+  width: 15rem;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: start;
+  transition-duration: 200ms;
+  position: relative;
 }
 .note-preview-container:hover {
-
-    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302),0 1px 3px 1px rgba(60,64,67,0.149);
-} 
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
+    0 1px 3px 1px rgba(60, 64, 67, 0.149);
+}
 
 .note img {
-    width: 13rem;
-    margin-block-end: 1rem;
-    align-self: center;
+  width: 13rem;
+  margin-block-end: 1rem;
+  align-self: center;
 }
 
 .line-through {
-    text-decoration: line-through;
+  text-decoration: line-through;
+}
+
+.note-preview-container .actions {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  width: inherit;
+  padding-inline-end: 1rem;
+}
+
+.note-preview-container .actions i {
+  cursor: pointer;
+  opacity: 0.7;
+  border-radius: 100%;
+}
+
+.note-preview-container .actions i:hover {
+opacity: 1;
+transition: opacity 200ms ease-in-out;
+}
+
+.dropdown-content {
+  width: 6rem;
+  position: absolute;
+  bottom: 23px;
+  right: 17px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.dropdown-content span {
+  width: 15px;
+  height: 15px;
+  border: 0.5px solid rgb(145, 139, 139);
+  border-radius: 50%;
+}
+
+.dropdown-content span:hover {
+  transform: scale(1.2);
+}
+.actions .right-actions {
+  display: flex;
+  justify-content: space-evenly;
+  width: 7rem;
+}
+
+.actions .pin-action {
+  width: 1rem;
+  flex-grow: 1;
 }

@@ -43,9 +43,8 @@ const noteTodos = {
             </h4>
             <ul>
                 <li v-for="(todo,idx) in data.info.todos">
-                <input type="checkbox" :id="'todo-'+data.id+'-'+idx" :checked="todo.isCompleted" @click="onToggleCompleted(todo)">
-                <label :for="'todo-'+data.id+'-'+idx" :class="{'line-through': todo.isCompleted}" v-if=""> {{todo.txt }}</label>
-                
+                    <input type="checkbox" :id="'todo-'+data.id+'-'+idx" :checked="todo.isCompleted" @click="onToggleCompleted(todo)">
+                    <label :for="'todo-'+data.id+'-'+idx" :class="{'line-through': todo.isCompleted}" v-if=""> {{todo.txt }}</label>
                 </li>
             </ul>
         </div>
@@ -73,7 +72,7 @@ export default {
     props: ['note'],
     template:`
         <section class="keep-preview">
-        <div >
+        <div class="keep-preview-container">
             <component 
                         :is="note.type" 
                         :data="note" 
