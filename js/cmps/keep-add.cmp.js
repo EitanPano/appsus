@@ -5,18 +5,19 @@ export default {
     components: {
         keepService
     },
-    props: [],
+    props: ['type'],
     template: `
         <section class="keep-add">
             <input type="text" v-model="note.info.title" placeholder="Title"/>
-            <div v-if="note.type === 'noteTxt'">
-                <input type="text" v-model="note.info.txt" placeholder="Take a note..." @click=""/>
+            <div v-if="type === 'noteTxt'">
+                <input type="text" v-model="note.info.txt" placeholder="Take a note..."/>
+               
             </div>
-            <div v-if="note.type === 'noteImg'">
-                <input type="text" v-model="note.info.txt" placeholder="Take a note..." @click=""/>
+            <div v-if="type === 'noteImg'">
+                <input type="text" v-model="note.info.txt" placeholder="Take a note..."/>
                 <input type="text" v-model="note.info.url" placeholder="Enter image URL"/>
             </div>
-            <div v-if="note.type === 'noteTodos'">
+            <div v-if="type === 'noteTodos'">
                 <div class="todoList" style="display:flex; flex-direction:column;">
                     <div>
                         <input type="text" v-model="todoTxt" @keyup.enter="addTask" placeholder="New task">
@@ -26,9 +27,6 @@ export default {
                 </div>
             </div>
             <button @click="add">+</button>
-            <button @click="getNote('noteTxt')">noteTxt</button>
-            <button @click="getNote('noteImg')">noteImg</button>
-            <button @click="getNote('noteTodos')">noteTodos</button>
         </section>
     `,
     data() {
@@ -38,7 +36,11 @@ export default {
         };
     },
     created() {
-        this.note = keepService.getEmptyNote()
+        if(!this.id) {
+            this.getNote(this.type);
+        } else {
+            this.getNoteById(this.id);
+        }
     },
     methods: {
         getNote(type) {

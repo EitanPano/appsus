@@ -4,6 +4,9 @@ import keepApp from './pages/keep-app.cmp.js';
 import emailDetails from './pages/email-details.cmp.js';
 import keepDetails from './pages/keep-details.cmp.js';
 import emailInbox from './cmps/email-inbox.cmp.js';
+// import aboutPage from './pages/about-page.cmp.js';
+// import aboutTeam from './pages/about-team.cmp.js';
+// import aboutService from './pages/about-service.cmp.js';
 
 
 const routes = [
@@ -27,12 +30,28 @@ const routes = [
     },
     {
         path: '/keep',
-        component: keepApp
+        component: keepApp,
     },
-    {
-        path: '/keep/:noteId',
-        component: keepDetails
-    },
+   
+    // {
+    //     path: '/about',
+    //     component: aboutPage,
+    //     children: [
+    //         {
+    //             path: '/about/team',
+    //             component: aboutTeam
+    //         },
+    //         {
+    //             path: '/about/service',
+    //             component: aboutService
+    //         },
+    //     ]
+    // },
+
+    // {
+    //     path: '/book',
+    //     component: bookApp
+    // },
 ];
 
 export const router = new VueRouter({ routes });
