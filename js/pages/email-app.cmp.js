@@ -71,8 +71,8 @@ export default {
             this.loadEmails();
         },
         setStatus(status) {
+            this.filterBy = { ...this.filterBy, status }
             console.log('status from cmp', status);
-            this.filterBy.status = status;
             this.loadEmails();
             // }
         },

@@ -23,15 +23,22 @@ function query(filterBy = null) {
     return storageService.query(EMAILS_KEY).then((mails) => {
         let searchStr = filterBy.searchStr.toLowerCase();
         if (!filterBy) return mails;
+        console.log(mails);
+        console.log(`filterBy.status`, filterBy.status)
+        console.log(`filterBy.isStarred`, filterBy.isStarred)
+
         if (filterBy.isRead !== 'all') {
             let isRead = filterBy.isRead === 'read' ? true : false;
             mails = mails.filter((email) => email.isRead === isRead);
         }
+        console.log(filterBy);
         if (filterBy.status === 'starred') {
             return mails.filter((mail) => mail.isStarred);
         }
+        
         return mails.filter((mail) => {
-            return (
+            return  (
+
                 mail.status === filterBy.status &&
                 (mail.subject.toLowerCase().includes(searchStr) ||
                     mail.body.toLowerCase().includes(searchStr))

@@ -1,2 +1,3 @@
-@import '/css/cmps/keep-app/keep-list.css';
-@import '/css/cmps/keep-app/keep-add.css';
+@import '../cmps/keep-app/keep-list.css';
+@import '../cmps/keep-app/keep-add.css';
+@import '../cmps/keep-app/keep-details.css';
