@@ -7,7 +7,7 @@
 .email-list li {
     border-bottom: 1px solid #000;
     background-color: #fff;
-
+    white-space: nowrap;
     position: relative;
     /* overflow: hidden; */
 }
@@ -36,19 +36,33 @@
     padding: 0.5em;
     border-radius: 50%;
     border: none;
+    margin: 0 0.5em;
 }
 
 .email-list .fa, .email-list .far {
-    font-size: 20px;
+    font-size: 1.5em;
 }
 
 .email-list .from , .email-list .subject{
     font-weight: bold;
 }
 
-.email-list p {
-    /* max-height: 1em; */
+.email-list .list-main {
+    display: flex;
+    align-items: center;
+    min-width: 10em;
     margin: 0;
+    margin-right: 2em;
+}
+
+.email-list .list-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-start;
+    text-align: left;
+    overflow: hidden;
+    margin-right: 1em;
 }
 
 

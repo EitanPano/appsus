@@ -3,11 +3,14 @@ export default {
     template: `
         <li :class="showRead" @mouseover="hover = true" @mouseleave="hover = false" >
             <router-link :to="'/email/'+email.id">
-                <button @click.prevent="toggleStar"><i :class="showStarred" aria-hidden="true"></i></button>
-                <!-- <i @click.prevent="toggleStar" class="fa fa-star" aria-hidden="true"></i> -->
-                <p class="from">{{ email.from }}</p>
-                <p class="subject">{{ email.subject }}</p>
-                <p class="body">{{ email.body }}</p>
+                <div class="list-main">
+                    <button @click.prevent="toggleStar"><i :class="showStarred" aria-hidden="true"></i></button>
+                    <p class="from">{{ email.from }}</p>
+                </div>
+                <div class="list-content">
+                    <p class="subject">{{ email.subject }} &nbsp-&nbsp</p>
+                    <p class="body">{{ email.body }}</p>
+                </div>
                 <div v-if="hover">
                     <button @click.prevent="toggleRead">{{ showRead }}</button>
                     <button @click.prevent="$emit('removed', email.id)">Delete</button> 
