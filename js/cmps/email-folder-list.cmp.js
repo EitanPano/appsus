@@ -6,10 +6,10 @@ export default {
                 <p class="plus">+</p>
                 <p>Compose</p>
             </div>
-            <p @click="$emit('setStatus', 'inbox')">Inbox</p>
-            <p @click="$emit('setStatus', 'starred')">Starred</p>
-            <p @click="$emit('setStatus', 'sent')">Sent</p>
-            <p @click="$emit('setStatus', 'trash')">Trash</p>
+            <a href="" @click.prevent="$emit('setStatus', 'inbox')"><i class="fas fa-inbox"></i>Inbox</a>
+            <a href="" @click.prevent="$emit('setStatus', 'starred')"><i class="fas fa-star"></i>Starred</a>
+            <a href="" @click.prevent="$emit('setStatus', 'sent')"><i class="fas fa-paper-plane"></i>Sent</a>
+            <a href="" @click.prevent="$emit('setStatus', 'trash')"><i class="fas fa-trash"></i>Trash</a>
         </aside>
     `,
 };

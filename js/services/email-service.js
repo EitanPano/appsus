@@ -21,30 +21,32 @@ export const emailService = {
 
 function query(filterBy = null) {
     return storageService.query(EMAILS_KEY).then((mails) => {
-        let searchStr = filterBy.searchStr.toLowerCase();
         if (!filterBy) return mails;
-        console.log(mails);
-        console.log(`filterBy.status`, filterBy.status)
-        console.log(`filterBy.isStarred`, filterBy.isStarred)
-
+        let searchStr = filterBy.searchStr
+            ? filterBy.searchStr.toLowerCase()
+            : '';
         if (filterBy.isRead !== 'all') {
             let isRead = filterBy.isRead === 'read' ? true : false;
             mails = mails.filter((email) => email.isRead === isRead);
         }
-        console.log(filterBy);
         if (filterBy.status === 'starred') {
-            return mails.filter((mail) => mail.isStarred);
+            return mails.filter(
+                (mail) => mail.isStarred && searchFilter(mail, searchStr)
+            );
         }
-        
         return mails.filter((mail) => {
-            return  (
-
-                mail.status === filterBy.status &&
-                (mail.subject.toLowerCase().includes(searchStr) ||
-                    mail.body.toLowerCase().includes(searchStr))
+            return (
+                mail.status === filterBy.status && searchFilter(mail, searchStr)
             );
         });
     });
+}
+
+function searchFilter(mail, searchStr) {
+    return (
+        mail.subject.toLowerCase().includes(searchStr) ||
+        mail.body.toLowerCase().includes(searchStr)
+    );
 }
 
 function getById(emailId) {
@@ -55,7 +57,7 @@ function sendEmail(newEmail) {
     newEmail.id = utilService.makeId();
     newEmail.isRead = false;
     newEmail.sentAt = Date.now();
-    return storageService.post(EMAILS_KEY, newEmail).then(query);
+    return storageService.post(EMAILS_KEY, newEmail).then((res)=>query());
 }
 
 function toggleRead(emailId, isRead) {
@@ -87,9 +89,9 @@ function _createEmails() {
             to: 'momo@momo.com',
             subject: 'Hello Mr.Someone',
             body: 'Please contribute to our nigerian prince',
-            sentAt: 1159139990594,
-            isRead: false,
-            isStarred: false,
+            sentAt: 1636800030594,
+            isRead: true,
+            isStarred: true,
             status: 'inbox',
         },
         {
@@ -98,7 +100,8 @@ function _createEmails() {
             to: 'momo@momo.com',
             subject: 'Would you like to buy our product?',
             body: "Your subscription has ended, please notice you won't be able to use our services from now on.",
-            sentAt: 1551195130594,
+            
+            sentAt: 1636800030594 - (100000000),
             isRead: true,
             isStarred: false,
             status: 'inbox',
@@ -109,9 +112,97 @@ function _createEmails() {
             to: 'momo@momo.com',
             subject: 'Hello Poopybutt',
             body: 'You may wipe better in order to not really change the subject',
-            sentAt: 1544441250594,
+            sentAt: 1636800030594 - (100000000 *2),
+            isRead: false,
+            isStarred: false,
+            status: 'inbox',
+        },
+        {
+            id: utilService.makeId(),
+            from: 'Avihai Mochi',
+            to: 'momo@momo.com',
+            subject: 'Hello Poopybutt',
+            body: 'You may wipe better in order to not really change the subject',
+            sentAt: 1636800030594 - (100000000 *4),
+            isRead: false,
+            isStarred: false,
+            status: 'inbox',
+        },
+        {
+            id: utilService.makeId(),
+            from: 'Avihai Mochi',
+            to: 'momo@momo.com',
+            subject: 'Hello Poopybutt',
+            body: 'You may wipe better in order to not really change the subject',
+            sentAt: 1636800030594 - (100000000 *5),
             isRead: false,
             isStarred: true,
+            status: 'inbox',
+        },
+        {
+            id: utilService.makeId(),
+            from: 'Avihai Mochi',
+            to: 'momo@momo.com',
+            subject: 'Hello Poopybutt',
+            body: 'You may wipe better in order to not really change the subject',
+            sentAt: 1636800030594 - (100000000 *6),
+            isRead: false,
+            isStarred: false,
+            status: 'inbox',
+        },
+        {
+            id: utilService.makeId(),
+            from: 'Avihai Mochi',
+            to: 'momo@momo.com',
+            subject: 'Hello Poopybutt',
+            body: 'You may wipe better in order to not really change the subject',
+            sentAt: 1636800030594 - (100000000 *8),
+            isRead: true,
+            isStarred: false,
+            status: 'inbox',
+        },
+        {
+            id: utilService.makeId(),
+            from: 'Avihai Mochi',
+            to: 'momo@momo.com',
+            subject: 'Hello Poopybutt',
+            body: 'You may wipe better in order to not really change the subject',
+            sentAt: 1636800030594 - (100000000 *11),
+            isRead: true,
+            isStarred: false,
+            status: 'inbox',
+        },
+        {
+            id: utilService.makeId(),
+            from: 'Avihai Mochi',
+            to: 'momo@momo.com',
+            subject: 'Hello Poopybutt',
+            body: 'You may wipe better in order to not really change the subject',
+            sentAt: 1636800030594 - (100000000 *13),
+            isRead: false,
+            isStarred: false,
+            status: 'inbox',
+        },
+        {
+            id: utilService.makeId(),
+            from: 'Avihai Mochi',
+            to: 'momo@momo.com',
+            subject: 'Hello Poopybutt',
+            body: 'You may wipe better in order to not really change the subject',
+            sentAt: 1636800030594 - (100000000 *15),
+            isRead: false,
+            isStarred: false,
+            status: 'inbox',
+        },
+        {
+            id: utilService.makeId(),
+            from: 'Avihai Mochi',
+            to: 'momo@momo.com',
+            subject: 'Hello Poopybutt',
+            body: 'You may wipe better in order to not really change the subject',
+            sentAt: 1636800030594 - (100000000 *15),
+            isRead: false,
+            isStarred: false,
             status: 'inbox',
         },
     ];

@@ -18,7 +18,9 @@ export default {
             newEmail: {
             to: null,
             subject: null,
-            body: null
+            body: null,
+            isStarred: false,
+            status: 'inbox',
             }
         }
     },

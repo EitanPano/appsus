@@ -7,11 +7,12 @@ export default {
     },
     template: `
         <main class="email-list">
-            <div>
+            <div class="sort-bar flex align-center space-between">
                 <p>Unread: {{ showUnreadCount }}</p>
-                <div>
-                    <button @click="sortByDate">{{ showDateOrder }}</button>
-                    <button @click="sortByABC">A - Z</button>
+                <div class="tools">
+                    <p>Sort :&nbsp</p>
+                    <button class="btn-date" @click="sortByDate">{{ sortDateBtn }}</button>
+                    <button class="btn-abc" @click="sortByABC"><i :class="abcIcon"></i></button>
                 </div>
             </div>
             <ul>
@@ -32,6 +33,7 @@ export default {
             sortBy: null,
         };
     },
+    
     methods: {
         toggleStarred(emailId, isStarred) {
             this.$emit('toggleStarred',emailId, isStarred);
@@ -52,23 +54,15 @@ export default {
             if (this.sortBy === 'ABC') {
                 this.sortBy = null;
                 this.emails.sort((a, b) =>
-                    a.from.toLowerCase() < b.from.toLowerCase() ? -1 : 1);
+                    a.subject.toLowerCase() < b.subject.toLowerCase() ? -1 : 1);
             } else {
                 this.sortBy = 'ABC';
                 this.emails.sort((a, b) =>
-                    b.from.toLowerCase() < a.from.toLowerCase() ? -1 : 1);
+                    b.subject.toLowerCase() < a.subject.toLowerCase() ? -1 : 1);
             }
         },
     },
     computed: {
-        // sortedEmails() {
-        //     return (this.sortByDate)
-        //     ? this.emails.sort((a, b) => a.sentAt - b.sentAt)
-        //     : this.emails.sort((a, b) => b.sentAt - a.sentAt)
-        // },
-        showDateOrder() {
-            return this.sortByDate ? 'New' : 'Old';
-        },
         showUnreadCount() {
             const count = this.emails.reduce((acc, email) => {
                 return !email.isRead ? acc + 1 : acc;
@@ -78,5 +72,11 @@ export default {
         showTools() {
             return console.log('hover');
         },
+        sortDateBtn() {
+            return (this.sortBy === 'date') ? 'New' : 'Old';
+        },
+        abcIcon() {
+            return (this.sortBy === 'ABC') ? 'fas fa-sort-alpha-down-alt' : 'fas fa-sort-alpha-down';
+        }
     },
 };

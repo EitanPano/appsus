@@ -12,8 +12,8 @@ export default {
                     <p class="body">{{ email.body }}</p>
                 </div>
                 <div v-if="hover">
-                    <button @click.prevent="toggleRead">{{ showRead }}</button>
-                    <button @click.prevent="$emit('removed', email.id)">Delete</button> 
+                    <button @click.prevent="toggleRead"><i :class="readBtn"></i></button>
+                    <button @click.prevent="$emit('removed', email.id)"><i class="fas fa-trash"></i></button> 
                 </div>
                 <p v-else>{{ showSentAt }}</p>
             </router-link>
@@ -22,9 +22,11 @@ export default {
     data() {
         return {
             isRead: null,
-            isStarred: null,
             hover: false,
         };
+    },
+    created() {
+        this.isRead = this.email.isRead;
     },
     methods: {
         toggleRead() {
@@ -32,19 +34,25 @@ export default {
             this.$emit('toggleRead', this.email.id, this.isRead);
         },
         toggleStar() {
-            this.isStarred = !this.isStarred;
-            this.$emit('toggleStarred', this.email.id, this.isStarred);
+            console.log(!this.email.isStarred);
+            console.log(this.isStarred);
+            // this.isStarred = !this.isStarred
+            this.email.isStarred = !this.email.isStarred
+            this.$emit('toggleStarred', this.email.id, this.email.isStarred);
         },
     },
     computed: {
         showStarred() {
-            return (this.isStarred) ? 'fa fa-star txt-gold': 'far fa-star'; 
+            return this.email.isStarred ? 'fa fa-star txt-gold' : 'far fa-star';
         },
-        showRead() {
-            return (this.isRead) ? 'read' : 'Unread';
+        readBtn() {
+            return (this.isRead) ? 'fas fa-envelope-open-text' : 'fas fa-envelope';
         },
         showSentAt() {
             return new Date(this.email.sentAt).toLocaleDateString();
         },
+        showRead() {
+            return (this.email.isRead) ? 'read' : 'unread'
+        }
     },
 };

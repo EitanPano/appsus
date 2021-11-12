@@ -1,5 +1,5 @@
 import { emailService } from '../services/email-service.js';
-
+import { eventBus } from '../services/event-bus-service.js';
 export default {
     template:`
         <main class="app-main">
@@ -19,6 +19,13 @@ export default {
     },
      created() {
         const { emailId } = this.$route.params;
+        eventBus.$on('setStatus',(status)=>{
+            this.$router.push('/email').catch(()=>{})
+        })
         emailService.getById(emailId).then((email) => (this.email = email));
     },
+    destroyed(){
+        eventBus.$off('mailStatus')
+    }
+
 }

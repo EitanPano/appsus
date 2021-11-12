@@ -4,17 +4,40 @@
     flex-grow: 1;
 }
 
+.email-list .sort-bar {
+    padding: 0 1.5em;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.email-list .sort-bar .tools {
+    display: flex;
+    align-items: center;
+}
+
+.sort-bar .tools p {
+    font-size: 0.85em;
+}
+
+
+.sort-bar .tools .btn-date{
+    border-radius: 0.5em;
+    width: 3em;
+    font-weight: bold;
+    margin-left: 1em;
+}
+
 .email-list li {
     border-bottom: 1px solid #000;
     background-color: #fff;
     white-space: nowrap;
     position: relative;
-    /* overflow: hidden; */
 }
 
 .email-list li.read {
     height: em;
-    background-color: rgb(200, 200, 200);
+    background-color: rgb(230, 230, 230);
+    color: rgba(128, 128, 128, 0.8);
 }
 
 .email-list li:hover {
@@ -36,10 +59,16 @@
     padding: 0.5em;
     border-radius: 50%;
     border: none;
-    margin: 0 0.5em;
+    background-color: transparent;
+
+    transition: 0.3s;
 }
 
-.email-list .fa, .email-list .far {
+.email-list button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.email-list .fa, .email-list .far, .email-list .fas {
     font-size: 1.5em;
 }
 

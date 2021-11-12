@@ -4,7 +4,3 @@
 @import '../cmps/btn-compose.css';
 @import '../cmps/email-compose.css';
 
-.email-app {
-    display: flex;
-    flex-wrap: wrap;
-}
