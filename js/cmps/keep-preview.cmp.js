@@ -59,7 +59,20 @@ const noteTodos = {
             todo.isCompleted = !todo.isCompleted;
         }
     },
-    
+};
+const noteVideo = {
+    props: ['data'],
+    template: `
+        <div class="note note-video">
+            <iframe width="100%" :src="data.info.url" allowfullscreen></iframe>
+            <h4>
+                {{data.info.title}}
+            </h4>
+            <p>
+                {{data.info.txt}}
+            </p> 
+        </div>
+    `
 };
 
 
@@ -67,7 +80,8 @@ export default {
     components: {
         noteTxt,
         noteImg,
-        noteTodos
+        noteTodos,
+        noteVideo
     },
     props: ['note'],
     template:`
@@ -78,6 +92,11 @@ export default {
                         :data="note" 
                         >
             </component>
+            <div v-for="label in note.labels" class="labels-container">
+                <ul>
+                    <li class="label">{{label}}</li>
+                </ul>
+            </div>
         </div>
 
         </section>

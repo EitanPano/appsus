@@ -8,15 +8,14 @@ export default {
     props: ['type', 'noteToEdit'],
     template: `
         <section class="keep-add">
-            <i class="far fa-times-circle hoverable" @click="close"></i>
+            <i v-if="!noteToEdit" class="far fa-times-circle hoverable" @click="close"></i>
             <input type="text" ref="titleInput" v-model="note.info.title" placeholder="Title"/>
             <div v-if="note.type === 'noteTxt'">
                 <input type="text" v-model="note.info.txt" placeholder="Take a note..."/>
-               
             </div>
-            <div v-if="note.type === 'noteImg'">
+            <div v-if="note.type === 'noteImg' || note.type === 'noteVideo'">
                 <input type="text" v-model="note.info.txt" placeholder="Take a note..."/>
-                <input type="text" v-model="note.info.url" placeholder="Enter image URL"/>
+                <input type="text" v-model="note.info.url" :placeholder="placeholderText"/>
             </div>
             <div v-if="note.type === 'noteTodos'">
                 <div class="todoList" style="display:flex; flex-direction:column;">
@@ -49,6 +48,9 @@ export default {
     computed: {
         buttonText() {
             return this.note.id ? 'Edit Note' : 'Add Note';
+        },
+        placeholderText(){
+            return this.note.type === 'noteImg' ? 'Enter image URL' : this.note.type === 'noteVideo' ? 'Enter video URL' : ''
         }
     },
     methods: {

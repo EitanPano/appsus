@@ -17,10 +17,11 @@ export default {
                 </div>
                 <div class="actions" v-show="idx === hoveredNoteIdx" >
                     <div class="pin-action">
-                        <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"  @mouseover="isColors=false"></i>
+                        <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"></i>
                     </div>
                     <div class="right-actions">
-                        <i title="Change note color" class="fas fa-palette info colors dropdown" @mouseover="isColors=true">
+                        <i title="Add label" class="fas fa-tag" @mouseover="isColors=false"></i>
+                        <i title="Change note color" class="fas fa-palette info colors dropdown" @mouseover="manageActions">
                             <div class="dropdown-content" v-show="isColors" @mouseout="isColors=false">
                                 <span @click="color(note.id, $event)" class="" style="background-color: #ffffff;"> &nbsp; </span>
                                 <span @click="color(note.id, $event)" class="" style="background-color: #f28b82;"> &nbsp; </span>
@@ -50,14 +51,14 @@ export default {
             editedNoteIdx: -1,
             isEdit: false,
             isColors: false,
+            isLabels: false
         };
     },
     computed: {},
     methods: {
         addNote(note) {
             this.isEdit = false;
-            this.editedNoteIdx = -1;
-                  
+            this.editedNoteIdx = -1;    
         },
         remove(noteId) {
             this.$emit("remove", noteId);
@@ -73,5 +74,9 @@ export default {
             this.isEdit = true;
             this.editedNoteIdx = idx;
         },
+        manageActions() {
+            isColors = false;
+            isLabels = true;
+        }
     },
 };

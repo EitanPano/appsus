@@ -69,7 +69,7 @@ function getEmptyNote(type = 'noteTxt') {
     if (type === 'noteTxt')
         return {
             id: '',
-            type: "noteTxt",
+            type,
             isPinned: false,
             info: {
                 title: "",
@@ -80,10 +80,10 @@ function getEmptyNote(type = 'noteTxt') {
                 backgroundColor: "#fff"
             }
         };
-    else if (type === 'noteImg')
+    else if (type === 'noteImg' || type === 'noteVideo')
         return {
             id: '',
-            type: "noteImg",
+            type,
             isPinned: false,
             info: {
                 url: "",
@@ -98,7 +98,7 @@ function getEmptyNote(type = 'noteTxt') {
     else if (type === 'noteTodos')
         return {
             id: "",
-            type: "noteTodos",
+            type,
             isPinned: false,
             info: {
                 title: "",
