@@ -1,3 +1,5 @@
+import {eventBus} from '../services/event-bus-service.js'
+
 export default {
     props: ['email'],
     template: `
@@ -27,6 +29,11 @@ export default {
     },
     created() {
         this.isRead = this.email.isRead;
+        eventBus.$on('details-toggleRead',()=>{
+            this.toggleRead()
+        }) 
+            
+        
     },
     methods: {
         toggleRead() {
@@ -34,9 +41,6 @@ export default {
             this.$emit('toggleRead', this.email.id, this.isRead);
         },
         toggleStar() {
-            console.log(!this.email.isStarred);
-            console.log(this.isStarred);
-            // this.isStarred = !this.isStarred
             this.email.isStarred = !this.email.isStarred
             this.$emit('toggleStarred', this.email.id, this.email.isStarred);
         },

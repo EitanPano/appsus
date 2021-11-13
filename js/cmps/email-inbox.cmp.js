@@ -34,6 +34,10 @@ export default {
             this.filterBy.status = status;
             this.loadEmails();
         });
+        eventBus.$on('toggleRead', (isRead) => {
+            this.filterBy.isRead = isRead;
+            this.loadEmails();
+        });
         if (this.note) this.isCompose = !this.isCompose
     },
     watch: {
@@ -73,7 +77,6 @@ export default {
                         (email) => email.id !== emailId
                     );
                 });
-            console.log(emailId);
         },
         setFilter({ searchStr, isRead }) {
             this.filterBy = { ...this.filterBy, searchStr, isRead };
@@ -85,7 +88,6 @@ export default {
                 .then(this.loadEmails);
         },
         toggleRead(emailId, isRead) {
-            console.log(emailId, isRead);
             emailService.toggleRead(emailId, isRead).then(this.loadEmails);
         },
     },
