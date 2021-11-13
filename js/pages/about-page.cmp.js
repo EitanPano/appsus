@@ -27,7 +27,7 @@ export default {
                                 </div>
                             </li>
                             <li>
-                                <span>PHP -</span>
+                                <span>Vue -</span>
                                 <span class="skill-progress">50%</span>
                                 <div class="skill-progress-pool">
                                     <div class="progress-pool-bar bar-fourth"></div>
@@ -70,7 +70,7 @@ export default {
                             </div>
                         </li>
                         <li>
-                            <span>PHP -</span>
+                            <span>Vue -</span>
                             <span class="skill-progress">50%</span>
                             <div class="skill-progress-pool">
                                 <div class="progress-pool-bar bar-fourth"></div>
@@ -80,9 +80,7 @@ export default {
                     <article>
                         <img src="./img/photo-adi.jpg" alt="Check Path">
                         <div class="links">
-                            <a href="https://www.facebook.com/eitan.pano/" target="blank"><img src="./img/facebook-circled-48.png" alt="Facebook"></a>
-                            <a href="https://github.com/eitanpano" target="blank" ><img src="./img/github-50.png" alt="GitHub"></a>
-                            <a href="https://www.linkedin.com/in/eitanpano/" target="blank" ><img src="./img/linkedin-48.png" alt="LinkedIN"></a>
+                            <a href="https://github.com/Adi-Davidovich" target="blank" ><img src="./img/github-50.png" alt="GitHub"></a>
                         </div>
                     </article> 
                 </div> 
