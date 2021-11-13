@@ -8,7 +8,7 @@ export default {
     `,
     computed: {
         showSale() {
-            if (this.book.listPrice.isOnSale) return '../../img/sale.svg';
+            if (this.book.listPrice.isOnSale) return './img/sale.svg';
             else return '';
         },
     }
