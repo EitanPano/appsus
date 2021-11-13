@@ -10,7 +10,7 @@ export default {
     <section>
         <email-filter @changed="setFilter" />
         <email-list @toggleStarred="toggleStarred" @toggleRead="toggleRead" @removed="removeEmail" v-if="emails" :emails="emails" />
-        <email-compose v-if="isCompose" :note="note" @sent="sendEmail" @closed="isCompose = false" />
+        <email-compose v-if="isCompose" :note="note" @sent="sendEmail" @closed="closeCompose" />
     </section>`,
     data() {
         return {
@@ -43,6 +43,10 @@ export default {
         },
     },
     methods: {
+        closeCompose() {
+            this.isCompose = false;
+            utilService.saveToStorage('noteToCompose', null);
+        },
         loadEmails() {
             emailService.query(this.filterBy).then((emails) => {
                 this.emails = emails;
