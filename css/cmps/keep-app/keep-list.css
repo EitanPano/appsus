@@ -65,18 +65,21 @@ transition: opacity 200ms ease-in-out;
 }
 
 .dropdown-content {
-  width: 6rem;
+  width: 7rem;
   position: absolute;
   bottom: 23px;
   right: 17px;
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
+  gap: 4px;
+  background-color: white;
+  box-shadow: 0 1px 2px 0 #00000010, 0 1px 3px 1px #00000020;
+  padding: 0.5rem;
 }
 
 .dropdown-content span {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   border: 0.5px solid rgb(145, 139, 139);
   border-radius: 50%;
 }
