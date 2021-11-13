@@ -27,7 +27,7 @@ export default {
                         <input v-for="todo in note.info.todos" type="text" :value="todo.txt" @keyup.enter="addTask" placeholder="New task">
                 </div>
             </div>
-            <button @click="add" class="add-btn">Add Note</button>
+            <button @click="saveNote" class="add-btn">{{buttonText}}</button>
         </section>
     `,
     data() {
@@ -46,12 +46,20 @@ export default {
     mounted() {
         this.$refs.titleInput.focus()  
     },
+    computed: {
+        buttonText() {
+            return this.note.id ? 'Edit Note' : 'Add Note';
+        }
+    },
     methods: {
         getNote(type) {
             this.note = keepService.getEmptyNote(type)
         },
-        add() {
-           this.$emit('add', this.note);
+        saveNote() {
+            keepService.save(this.note)
+            .then(note => {
+                this.$emit('addNote', note)
+            });
         },
         close() {
             this.$emit('close')

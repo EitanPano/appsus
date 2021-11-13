@@ -13,8 +13,7 @@ export default {
             <li v-for="(note,idx) in notes" :key="note.id" class="note-preview-container" :style="{'background-color': note.style.backgroundColor}"  @mouseover="hoveredNoteIdx = idx" @mouseout="hoveredNoteIdx = -1">
                 <keep-preview :note="note" />
                 <div v-if="idx === editedNoteIdx && isEdit" class="keep-edit">
-                    <keep-add :noteToEdit="note"  @add="addNote" @close="isEdit=false"/>
-                    <button @click="isEdit=false">dgd</button>
+                    <keep-add :noteToEdit="note"  @addNote="addNote" @close="isEdit=false"/>
                 </div>
                 <div class="actions" v-show="idx === hoveredNoteIdx" >
                     <div class="pin-action">
@@ -55,6 +54,11 @@ export default {
     },
     computed: {},
     methods: {
+        addNote(note) {
+            this.isEdit = false;
+            this.editedNoteIdx = -1;
+                  
+        },
         remove(noteId) {
             this.$emit("remove", noteId);
         },

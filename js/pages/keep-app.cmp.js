@@ -20,7 +20,7 @@ export default {
                         <i class="far fa-images fa-3x hoverable" @click="getNote('noteImg')"></i>
                     </div>              
                     <div v-if="isClicked" class="keep-edit">
-                        <keep-add :type="type"  @add="addNote" @close="isClicked=false"/>
+                        <keep-add :type="type"  @addNote="addNote" @close="isClicked=false"/>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@ export default {
     methods: {
         loadNotes() {
             keepService.query()
-                .then(notes => this.notes = notes)
+                .then(notes => this.notes = notes.reverse())
         },
         getNote(type) {
             this.note = keepService.getEmptyNote(type)
@@ -91,12 +91,9 @@ export default {
 
         },
         addNote(newNote) {
-            keepService.save(newNote)
-            .then(note => {
-                this.$refs.noteTxt.value = ''
-                this.notes.unshift(note)
-                this.isClicked = false;
-            });
+            this.$refs.noteTxt.value = ''
+            this.notes.unshift(newNote)
+            this.isClicked = false;
         },
         togglePin(noteId) {
             keepService.togglePin(noteId)
