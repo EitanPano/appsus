@@ -1,7 +1,8 @@
 export default {
     template: `
         <section class="about-page app-main">
-            <div class="eitan">
+            <div class="bg-cover"></div>
+            <div class="eitan space">
                 <div>
                     <div class="welcome">
                         <ul>
@@ -45,7 +46,7 @@ export default {
                     </div> 
                 </div> 
             </div>
-            <div class="adi">
+            <div class="adi space">
                 <div class="welcome flex row-reverse">
                     <ul>
                         <li>

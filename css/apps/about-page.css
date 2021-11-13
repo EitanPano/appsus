@@ -1,19 +1,36 @@
 .about-page {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     padding-top: 4em;;
     background-image: url(../../img/about_page.jpg);
     background-position: center;
-    background-size: cover;
+    background-size:cover;
     max-width: 1024px;
     background-repeat: no-repeat;
     margin: auto;
-    background-color:gray;
     min-height: calc(100vh - 10em);
+}
+
+.bg-cover {
+    width: 100vw;
+    height: 80vh;
+    position: fixed;
+    background-color: rgba(15, 33, 58, 0.8);
+    z-index: -1;
+}
+
+.space {
+    width: 100%;
 }
 
 .about-page article {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0 2em;
 }
 
 section .links {
@@ -28,7 +45,6 @@ section .links {
 }
 .links a, .links img {
     border-radius: 50%;
-    margin: auto;
     padding: 2.5px 2px 0;
     transition: 0.3s;
 }
@@ -38,22 +54,15 @@ section .links {
     transition: 0.2s;
 }
 
-.welcome {
-    /* max-width: 1000px; */
-    /* height: auto; */
+div.welcome {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
     font-weight: bold;
+    justify-content: flex-end;
     padding: 2em 2em;
 }
 .welcome ul {
     list-style-type: none;
-    width: 40%;
     min-width: 270px;
-    margin-bottom: 1em;
     color: white;
 }
 .welcome li {
@@ -94,12 +103,10 @@ section .links {
     box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.85);
 }
 
-@media (min-width:620px) {
-    .welcome {
-        flex-direction: row;
-    }
-    .about-page{
-        padding-top: 5em;
+@media (max-width:600px) {
+    .about-page .welcome {
+        flex-direction: column-reverse;
+        align-items: center;
     }
 }
 
