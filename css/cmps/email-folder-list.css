@@ -3,15 +3,16 @@
     width: 16em;
     background-color: white;
     position: fixed;
-    border-right: 2px solid gainsboro;
+    border-right: 2px solid rgb(240, 240, 240);
     box-shadow: 3px 0 10px 0 rgba(0, 0, 0, 0.35);
     display: flex;
     flex-direction: column;
+    z-index: 200;
 }
 
 .email-folder-list a {
     font-size: 1.1em;
-    padding: 0.3em 1em;
+    padding: 0.3em 1.5em;
     width: 90%;
     transition: 0.2s;
     border-radius: 0 2em 2em 0;
@@ -19,6 +20,11 @@
 
 .email-folder-list a:hover {
     background-color:gainsboro;
+}
+
+.email-folder-list a:focus {
+    background: gainsboro;
+    outline: none;
 }
 
 .email-folder-list i {

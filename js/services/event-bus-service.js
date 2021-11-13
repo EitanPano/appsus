@@ -1,9 +1,9 @@
 export const eventBus = new Vue()
 
-// eventBus.$on('puk',()=>{
-//     console.log('someone just puked~');
-// })
 
-// eventBus.$on('puk2',()=>{
-//     console.log('me too~');
-// })
+
+// eventBus.$on('composeNote', (note) => {
+//     // this.isCompose = true;
+//     console.log(note);
+//     // this.loadEmails();
+// });

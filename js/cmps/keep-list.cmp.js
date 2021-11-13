@@ -1,3 +1,5 @@
+// import { eventBus } from '../services/event-bus-service.js';
+import { utilService } from '../services/util-service.js';
 import keepPreview from "./keep-preview.cmp.js";
 import keepAdd from "./keep-add.cmp.js";
 
@@ -16,12 +18,10 @@ export default {
                     <keep-add :noteToEdit="note"  @addNote="addNote" @close="isEdit=false"/>
                 </div>
                 <div class="actions" v-show="idx === hoveredNoteIdx" >
-                    <div class="pin-action">
-                        <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"></i>
-                    </div>
+                    <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"  @mouseover="isColors=false"></i>
                     <div class="right-actions">
-                        <i title="Add label" class="fas fa-tag" @mouseover="isColors=false"></i>
-                        <i title="Change note color" class="fas fa-palette info colors dropdown" @mouseover="manageActions">
+                        <i title="Add label" class="fas fa-tag" @mouseover="manageActions"></i>
+                        <i title="Change note color" class="fas fa-palette info colors dropdown" @mouseover="isColors=false">
                             <div class="dropdown-content" v-show="isColors" @mouseout="isColors=false">
                                 <span @click="color(note.id, $event)" class="" style="background-color: #ffffff;"> &nbsp; </span>
                                 <span @click="color(note.id, $event)" class="" style="background-color: #f28b82;"> &nbsp; </span>
@@ -38,6 +38,7 @@ export default {
                             </div>  
                         </i>
                         <i title="Edit note" class="fas fa-edit" @mouseover="isColors=false" @click="openEdit(idx)"></i>    
+                        <i title="Compose as Email" @click="composeNote(note)" class="fas fa-paper-plane"></i>
                         <i title="Delete note" class="far fa-trash-alt" @click="remove(note.id)"></i>
                     </div>
                 </div>
@@ -56,7 +57,7 @@ export default {
     },
     computed: {},
     methods: {
-        addNote(note) {
+        addNote() {
             this.isEdit = false;
             this.editedNoteIdx = -1;    
         },
@@ -77,6 +78,12 @@ export default {
         manageActions() {
             isColors = false;
             isLabels = true;
-        }
-    },
+        },
+        composeNote(note) {
+            utilService.saveToStorage('noteToCompose', note)
+            this.$router.push('/email')
+            // eventBus.$emit('composeNote', note, true)
+        },
+    }
+    
 };

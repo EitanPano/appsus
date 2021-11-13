@@ -23,7 +23,7 @@ export default {
                         <input type="text" v-model="todoTxt" @keyup.enter="addTask" placeholder="New task">
                         <i class="fas fa-plus" @click="addTask"></i>
                     </div>
-                        <input v-for="todo in note.info.todos" type="text" :value="todo.txt" @keyup.enter="addTask" placeholder="New task">
+                    <input v-for="todo in note.info.todos" type="text" :value="todo.txt" @keyup.enter="addTask" placeholder="New task">
                 </div>
             </div>
             <button @click="saveNote" class="add-btn">{{buttonText}}</button>

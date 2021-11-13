@@ -22,18 +22,19 @@ export default {
     data() {
         return {
             status: 'inbox',
-            isCompose: null,
+            // isCompose: null,
         };
     },
     created() {
     },
     methods: {
         toggleCompose(){
-            this.isCompose = !this.isCompose
-            eventBus.$emit('toggleCompose',this.isCompose)
+            // this.isCompose = !this.isCompose
+            eventBus.$emit('toggleCompose')
         },
         setStatus(status) {
-            // this.$router.push(`/email/${status}`).catch(()=>{})
+            // not working when first, but if last then vue wont render?
+            // this.$router.push('/email/'+ this.status)
             eventBus.$emit('setStatus',status)
             this.status =  status 
         },
