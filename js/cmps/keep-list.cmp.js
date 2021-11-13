@@ -11,18 +11,11 @@ export default {
         <section class="keep-list">
             <ul class="keep-list-container">
             <li v-for="(note,idx) in notes" :key="note.id" class="note-preview-container" :style="{'background-color': note.style.backgroundColor}"  @mouseover="hoveredNoteIdx = idx" @mouseout="hoveredNoteIdx = -1">
-                <!-- <router-link :to="'/keep/'+note.id"> -->
-                <keep-preview @click.native="openEdit(idx)" :note="note" />
-                <!-- </router-link> -->
-                
-                <article :note="note" class="keep-edit" v-if="idx === editedNoteIdx && isEdit">
-                    <div>
+                <keep-preview :note="note" />
+                <div v-if="idx === editedNoteIdx && isEdit" class="keep-edit">
+                    <keep-add :noteToEdit="note"  @add="addNote" @close="isEdit=false"/>
                     <button @click="isEdit=false">dgd</button>
-                        <keep-add :note="note" :isEdit="isEdit"/>
-
-                    </div>
-                    
-                </article>
+                </div>
                 <div class="actions" v-show="idx === hoveredNoteIdx" >
                     <div class="pin-action">
                         <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"  @mouseover="isColors=false"></i>
@@ -44,7 +37,7 @@ export default {
                                 <span @click="color(note.id, $event)" class="" style="background-color: #e8eaed;"> &nbsp; </span>
                             </div>  
                         </i>
-                        <i title="Edit note" class="fas fa-edit" @mouseover="isColors=false"></i>    
+                        <i title="Edit note" class="fas fa-edit" @mouseover="isColors=false" @click="openEdit(idx)"></i>    
                         <i title="Delete note" class="far fa-trash-alt" @click="remove(note.id)"></i>
                     </div>
                 </div>
@@ -56,7 +49,7 @@ export default {
         return {
             hoveredNoteIdx: -1,
             editedNoteIdx: -1,
-            isEdit: null,
+            isEdit: false,
             isColors: false,
         };
     },

@@ -12,17 +12,19 @@ export default {
     },
     template: `
         <section class="keep-app app-main">
-            <input type="text" placeholder="Title" @click="getNote('noteTxt')"/>
-            
-            <!-- <button @click="getNote('noteTxt')">noteTxt</button> -->
-            <button @click="getNote('noteImg')">noteImg</button>
-            <button @click="getNote('noteTodos')">noteTodos</button>
-
-            <div v-if="isClicked" class="keep-edit">
-                <button @click="isClicked=false">dgd</button>
-                <keep-add :type="type"  @add="addNote"/>
-                
+            <div class="add-container">
+                <div class="add-note-actions">
+                    <input ref="noteTxt" class="noteTxt" type="text" placeholder="Take a note..." @click="getNote('noteTxt')"/> 
+                    <div class="fas-box" style="font-size: 0.5rem;">
+                        <i class="far fa-check-square fa-3x hoverable" @click="getNote('noteTodos')"></i>
+                        <i class="far fa-images fa-3x hoverable" @click="getNote('noteImg')"></i>
+                    </div>              
+                    <div v-if="isClicked" class="keep-edit">
+                        <keep-add :type="type"  @add="addNote" @close="isClicked=false"/>
+                    </div>
+                </div>
             </div>
+            
             <section class="pinned-notes" v-if="pinnedNotes.length>0">
                 <h3>Pinned Notes:</h3>  
                 <keep-list :notes="pinnedNotes"  @remove="removeNote" @color="changeNoteBgc" @pin="togglePin" />
@@ -91,7 +93,8 @@ export default {
         addNote(newNote) {
             keepService.save(newNote)
             .then(note => {
-                this.notes.push(note)
+                this.$refs.noteTxt.value = ''
+                this.notes.unshift(note)
                 this.isClicked = false;
             });
         },
