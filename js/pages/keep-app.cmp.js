@@ -1,3 +1,4 @@
+import { utilService } from '../services/util-service.js';
 import { keepService } from '../services/keep-service.js';
 import keepList from '../cmps/keep-list.cmp.js';
 import keepAdd from '../cmps/keep-add.cmp.js';
@@ -33,12 +34,12 @@ export default {
             </div>
             
             <section class="pinned-notes" v-if="pinnedNotes.length>0">
-                <h3>Pinned Notes:</h3>  
+                <div class="notes-title">Pinned Notes:</div>  
                 <keep-list :notes="pinnedNotes"  @remove="removeNote" @color="changeNoteBgc" @pin="togglePin" 
                     @addLabel="addLabel" @removeLabel="removeLabel" @duplicate="duplicateNote"/>
             </section>
             <section class="unpinned-notes">
-                <h3>Notes:</h3>  
+                <div class="notes-title">Notes:</div>  
                 <div class="unpinned-notes-container">
                     <keep-list :notes="unpinnedNotes"  @remove="removeNote" @color="changeNoteBgc" @pin="togglePin" 
                         @addLabel="addLabel" @removeLabel="removeLabel" @duplicate="duplicateNote"/>
@@ -57,16 +58,22 @@ export default {
                 searchStr: '',
                 noteType: 'all',
             },
+            email: utilService.loadFromStorage('emailToCompose') || null
         };
     },
     created() {
         this.loadNotes();
         this.note = keepService.getEmptyNote();
+        if(this.email) keepService.composeEmail(this.email).then(note=>{
+            this.notes.unshift(note);
+            this.email = null;
+            utilService.saveToStorage('emailToCompose', undefined)
+        })
     },
     methods: {
         loadNotes() {
             keepService.query(this.filterBy)
-                .then(notes => this.notes = notes.reverse())
+                .then(notes => this.notes = notes)
         },
         setFilter({searchStr, noteType}) {
             this.filterBy = { ...this.filterBy, searchStr, noteType };

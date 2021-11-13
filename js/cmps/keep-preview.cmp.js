@@ -1,4 +1,3 @@
-import { keepService } from '../services/keep-service.js'; 
 
 const noteTxt = {
     props: ['data'],
@@ -42,7 +41,7 @@ const noteTodos = {
             <h4>
                 {{data.info.title}}
             </h4>
-            <ul>
+            <ul class="todos-container">
                 <li v-for="(todo,idx) in data.info.todos">
                     <input type="checkbox" :id="'todo-'+data.id+'-'+idx" :checked="todo.isCompleted" @click="onToggleCompleted(todo)">
                     <label :for="'todo-'+data.id+'-'+idx" :class="{'line-through': todo.isCompleted}" v-if=""> {{todo.txt }}</label>
@@ -94,10 +93,11 @@ export default {
                         >
             </component>
             <div >
-                <ul v-for="(label, idx) in note.labels" class="labels-container">
-                    <li class="note-label" :style="{'background-color': label.color}" @mouseover="isLabel=true" @mouseout="isLabel=false">
+                <ul  class="labels-container">
+                    <li v-for="(label, idx) in note.labels" class="note-label" :style="{'background-color': label.color}" 
+                        @mouseover="isLabel=true; labelIdx = idx" @mouseout="isLabel=false; labelIdx = -1">
                         {{label.name}}
-                        <i v-show="isLabel" @click="removeLabel(note.id, idx)" class="fas fa-times fa-xs"></i>
+                        <i v-show="isLabel && labelIdx === idx" @click="removeLabel(note.id, idx)" class="fas fa-times fa-xs"></i>
                     </li>
                 </ul>
             </div>
@@ -107,7 +107,9 @@ export default {
     `,
     data() {
         return {
-            isLabel: false
+            isLabel: false,
+            labelIdx: -1
+
         }
     },
     methods: {

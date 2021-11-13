@@ -1,3 +1,4 @@
+import { utilService } from '../services/util-service.js';
 import { emailService } from '../services/email-service.js';
 import { eventBus } from '../services/event-bus-service.js';
 
@@ -13,6 +14,7 @@ export default {
                         <button @click.prevent="toggleRead(email.id, email.isRead)"><i :class="readBtn"></i></button>
                         <button @click.prevent="toggleStarred(email.id, email.isStarred)"><i :class="showStarred" aria-hidden="true"></i></button>
                         <button @click.prevent="removeEmail(email.id)"><i class="fas fa-trash"></i></button> 
+                        <button @click.prevent="composeEmail(email)"><i class="far fa-sticky-note"></i></button> 
                     </div>
                     <p>{{ showSentAt }}</p>
                 </div>
@@ -68,6 +70,10 @@ export default {
                 emailService.getById(emailId.id)
                     .then((email) => (this.email = email));
             });
+        },
+        composeEmail(email) {
+            utilService.saveToStorage('emailToCompose', email)
+            this.$router.push('/keep')
         },
     },
     computed: {

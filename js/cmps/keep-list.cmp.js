@@ -18,23 +18,23 @@ export default {
                     <keep-add :noteToEdit="note"  @addNote="addNote" @close="isEdit=false"/>
                 </div>
                 <div class="actions" v-show="idx === hoveredNoteIdx" >
-                    <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"  @mouseover="isColors=false"></i>
+                    <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"  @mouseover="isColors=false; isLabels=false"></i>
                     <div class="right-actions">
                         <i title="Add label" class="fas fa-tag" @mouseover="manageActions">
                             <div class="labels-dropdown-content" v-show="isLabels" @mouseout="isLabels=false" @mouseover="isEdit=true">
                                 <ul>
-                                    <li @click="addLabel(note.id, 'Critical', 'red')" :style="{'background-color': 'red'}">Critical</li>
-                                    <li @click="addLabel(note.id, 'Family', 'blue')" :style="{'background-color': 'blue'}">Family</li>
-                                    <li @click="addLabel(note.id, 'Work', 'green')" :style="{'background-color': 'green'}">Work</li>
-                                    <li @click="addLabel(note.id, 'Friend', 'yellow')" :style="{'background-color': 'yellow'}">Friend</li>
-                                    <li @click="addLabel(note.id, 'Spam', 'orange')" :style="{'background-color': 'orange'}">Spam</li>
-                                    <li @click="addLabel(note.id, 'Memories', 'purple')" :style="{'background-color': 'purple'}">Memories</li>
-                                    <li @click="addLabel(note.id, 'Romantic', 'aquamarine')" :style="{'background-color': 'aquamarine'}">Romantic</li>
+                                    <li @click="addLabel(note.id, 'Critical', '#eb5a46')" :style="{'background-color': '#eb5a46'}">Critical</li>
+                                    <li @click="addLabel(note.id, 'Family', '#0079bf')" :style="{'background-color': '#0079bf'}">Family</li>
+                                    <li @click="addLabel(note.id, 'Work', '#61bd4f')" :style="{'background-color': '#61bd4f'}">Work</li>
+                                    <li @click="addLabel(note.id, 'Friend', '#f2d600')" :style="{'background-color': '#f2d600'}">Friend</li>
+                                    <li @click="addLabel(note.id, 'Spam', '#ff9f1a')" :style="{'background-color': '#ff9f1a'}">Spam</li>
+                                    <li @click="addLabel(note.id, 'Memories', '#c377e0')" :style="{'background-color': '#c377e0'}">Memories</li>
+                                    <li @click="addLabel(note.id, 'Romantic', '#17a2b8')" :style="{'background-color': '#17a2b8'}">Romantic</li>
                                 </ul>
                                
                             </div>
                         </i>
-                        <i title="Change note color" class="fas fa-palette" @mouseover="isColors=true">
+                        <i title="Change note color" class="fas fa-palette" @mouseover="isColors=true; isLabels=false">
                             <div class="color-dropdown-content" v-show="isColors" @mouseout="isColors=false" @mouseover="isEdit=true">
                                 <span @click="color(note.id, $event)" class="" style="background-color: #ffffff;"> &nbsp; </span>
                                 <span @click="color(note.id, $event)" class="" style="background-color: #f28b82;"> &nbsp; </span>

@@ -15,7 +15,8 @@ export const keepService = {
     togglePin,
     addLabel,
     removeLabel,
-    duplicateNote
+    duplicateNote,
+    composeEmail
 
 };
 
@@ -57,6 +58,26 @@ function searchFilter(note, searchStr) {
             return todo.txt.toLowerCase().includes(searchStr)
         })
     );
+}
+
+function composeEmail(email) {
+    const note = {
+        id: '',
+        type: 'noteTxt',
+        isPinned: false,
+        info: {
+            title: email.subject,
+            txt: `from: ${email.from}
+            To: ${email.to}
+            Sent at: ${_showSentAt(email.sentAt)}
+            ${email.body}` 
+        },
+        labels: [],
+        style: {
+            backgroundColor: "#fff"
+        }
+    }
+    return storageService.post(KEEP_KEY, note);
 }
 
 function remove(noteId) {
@@ -241,3 +262,6 @@ function _createNote(vendor, maxSpeed = 250) {
     return note;
 }
 
+function _showSentAt(date) {
+    return new Date(date).toLocaleDateString();
+}

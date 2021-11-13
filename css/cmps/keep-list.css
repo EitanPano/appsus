@@ -8,16 +8,6 @@
   gap: 1rem;
 }
 
-.note-txt {
-  grid-row: span 2;
-}
-.note-img {
-  grid-row: span 7;
-}
-.note-todos {
-  grid-row: span 3;
-}
-
 .note-preview-container {
   width: 15rem;
   height: fit-content;
@@ -33,6 +23,11 @@
 .note-preview-container:hover {
   box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
     0 1px 3px 1px rgba(60, 64, 67, 0.149);
+}
+
+.notes-title {
+ margin: 30px;
+  font-size: 1.2em;
 }
 
 .note img {
@@ -63,6 +58,22 @@
 .note-preview-container .actions i:hover {
   opacity: 1;
   transition: opacity 200ms ease-in-out;
+}
+
+.labels-dropdown-content {
+  position: absolute;
+  bottom: 23px;
+  right: 130px;
+  background-color: white;
+  box-shadow: 0 1px 2px 0 #00000010, 0 1px 3px 1px #00000020;
+}
+
+.labels-dropdown-content li {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 1rem;
+  color: white;
+  padding: 0.5rem;
 }
 
 .color-dropdown-content {
