@@ -1,10 +1,14 @@
 .app-footer {
-    background-color:rgba(46, 90, 160, 0.411);
-    height: 10em;
+    /* background-color:rgba(46, 90, 160, 0.411); */
+    background-color: transparent;
+    height: 5em;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    color: rgb(238, 238, 238);
-    box-shadow: inset 0 5px 0 0 gainsboro;
+    margin-top: 3rem;
+    /* color: rgb(238, 238, 238); */
+    color: rgb(68, 66, 66);
+    /* box-shadow: inset 0 5px 0 0 gainsboro; */
+    font-size: 0.8em;
 }

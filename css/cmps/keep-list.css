@@ -10,6 +10,7 @@
 
 .note-preview-container {
   width: 15rem;
+  min-width: 15rem;
   height: fit-content;
   display: flex;
   flex-direction: column;

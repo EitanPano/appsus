@@ -1,7 +1,8 @@
 export default {
     template: `
     <header class="app-header">
-        <h1><a class="logo" href="">Appsus</a></h1>
+        <!-- <h1><a class="logo" href=""></a></h1> -->
+        <div class="logo"></div>
         <nav>
             <ul class="main-nav" :class="menuOpen" @click="toggleMenu">
                 <li><router-link to="/" exact><i class="fas fa-home"></i></router-link></li>
