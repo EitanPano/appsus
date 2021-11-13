@@ -27,7 +27,7 @@ export default {
                                 </div>
                             </li>
                             <li>
-                                <span>PHP -</span>
+                                <span>Vue -</span>
                                 <span class="skill-progress">50%</span>
                                 <div class="skill-progress-pool">
                                     <div class="progress-pool-bar bar-fourth"></div>
@@ -70,7 +70,7 @@ export default {
                             </div>
                         </li>
                         <li>
-                            <span>PHP -</span>
+                            <span>Vue -</span>
                             <span class="skill-progress">50%</span>
                             <div class="skill-progress-pool">
                                 <div class="progress-pool-bar bar-fourth"></div>
@@ -78,6 +78,7 @@ export default {
                         </li>
                     </ul>
                     <article>
+                        <!-- REPLEASE YOUR DETAILS HERE -->
                         <img src="./img/git_profile.jpg" alt="Check Path">
                         <div class="links">
                             <a href="https://www.facebook.com/eitan.pano/" target="blank"><img src="./img/facebook-circled-48.png" alt="Facebook"></a>
