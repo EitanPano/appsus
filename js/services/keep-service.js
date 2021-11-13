@@ -12,18 +12,51 @@ export const keepService = {
     getEmptyNote,
     getById,
     changeColor,
-    togglePin
-    
+    togglePin,
+    addLabel,
+    removeLabel,
+    duplicateNote
+
 };
 
 function query(filterBy = {}) {
-    return storageService.query(KEEP_KEY)
-        .then(notes => {
-            if (filterBy.Notes) {
-                notes = notes.slice(0, 2);
-            }
-            return notes;
-        });
+    return storageService.query(KEEP_KEY).then(notes => {
+        if (!filterBy) return notes;
+
+        let searchStr = filterBy.searchStr?.toLowerCase() || '';
+
+        if (filterBy.noteType == 'all') {
+            return notes.filter(note => {
+                return searchFilter(note, searchStr)
+            })
+        }
+        if (filterBy.noteType === 'notes') {
+            return notes.filter(note =>
+                note.type === 'noteTxt' && searchFilter(note, searchStr));
+        }
+        else if (filterBy.noteType === 'lists') {
+            return notes.filter(note =>
+                note.type === 'noteTodos' && searchFilter(note, searchStr));
+        }
+        else if (filterBy.noteType === 'image') {
+            return notes.filter(note =>
+                note.type === 'noteImg' && searchFilter(note, searchStr));
+        }
+        else if (filterBy.noteType === 'video') {
+            return notes.filter(note =>
+                note.type === 'noteVideo' && searchFilter(note, searchStr));
+        }
+    });
+}
+
+function searchFilter(note, searchStr) {
+    return (
+        note.info.title?.toLowerCase().includes(searchStr) ||
+        note.info.txt?.toLowerCase().includes(searchStr) ||
+        note.info.todos?.some(todo => {
+            return todo.txt.toLowerCase().includes(searchStr)
+        })
+    );
 }
 
 function remove(noteId) {
@@ -31,21 +64,42 @@ function remove(noteId) {
     return storageService.remove(KEEP_KEY, noteId);
 }
 
+function duplicateNote(note) {
+    const newNote = { ...note }
+    return storageService.post(KEEP_KEY, newNote);
+}
+
 function changeColor(noteId, color) {
     return getById(noteId)
         .then(note => {
             note.style.backgroundColor = color
             return storageService.put(KEEP_KEY, note);
-            return query()
         });
 }
 
+function addLabel(noteId, labelName, labelColor) {
+    console.log(noteId);
+    return getById(noteId)
+        .then(note => {
+            console.log(note);
+            note.labels.push({ name: labelName, color: labelColor })
+            return storageService.put(KEEP_KEY, note);
+        });
+}
+
+function removeLabel(noteId, labelIdx) {
+    return getById(noteId)
+        .then(note => {
+            note.labels.splice(labelIdx, 1)
+            return storageService.put(KEEP_KEY, note);
+        });
+}
 
 function togglePin(noteId) {
     return getById(noteId).then(note => {
         note.isPinned = !note.isPinned;
         return keepService.save(note)
-    })     
+    })
 }
 
 function save(note) {
@@ -123,7 +177,16 @@ function _createNotes() {
                     title: "I am type txt",
                     txt: "Fullstack Me Baby!"
                 },
-                labels: ["later", "important"],
+                labels: [
+                    {
+                        name: "later",
+                        color: "#aecbfa"
+                    },
+                    {
+                        name: "important",
+                        color: "#aecbfa"
+                    }
+                ],
                 style: {
                     backgroundColor: "#aecbfa"
                 }
@@ -137,7 +200,12 @@ function _createNotes() {
                     title: "I am type img",
                     txt: ""
                 },
-                labels: ["inspo"],
+                labels: [
+                    {
+                        name: "Inspo",
+                        color: "#aecbfa"
+                    }
+                ],
                 style: {
                     backgroundColor: "#fbbc04"
                 }
@@ -153,7 +221,7 @@ function _createNotes() {
                         { txt: "Coding power", isCompleted: true }
                     ]
                 },
-                labels: ["important"],
+                labels: [],
                 style: {
                     backgroundColor: "#f28b82"
                 }
@@ -172,3 +240,4 @@ function _createNote(vendor, maxSpeed = 250) {
     };
     return note;
 }
+

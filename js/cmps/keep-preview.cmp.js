@@ -1,3 +1,4 @@
+import { keepService } from '../services/keep-service.js'; 
 
 const noteTxt = {
     props: ['data'],
@@ -92,17 +93,27 @@ export default {
                         :data="note" 
                         >
             </component>
-            <div v-for="label in note.labels" class="labels-container">
-                <ul>
-                    <li class="label">{{label}}</li>
+            <div >
+                <ul v-for="(label, idx) in note.labels" class="labels-container">
+                    <li class="note-label" :style="{'background-color': label.color}" @mouseover="isLabel=true" @mouseout="isLabel=false">
+                        {{label.name}}
+                        <i v-show="isLabel" @click="removeLabel(note.id, idx)" class="fas fa-times fa-xs"></i>
+                    </li>
                 </ul>
             </div>
         </div>
 
         </section>
     `,
-    created() {
-        
+    data() {
+        return {
+            isLabel: false
+        }
+    },
+    methods: {
+        removeLabel(noteId, labelIdx) {
+            this.$emit ('removeLabel', noteId, labelIdx)
+        }
     },
     computed: {
        

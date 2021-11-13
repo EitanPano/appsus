@@ -12,10 +12,26 @@ export default {
             <input type="text" ref="titleInput" v-model="note.info.title" placeholder="Title"/>
             <div v-if="note.type === 'noteTxt'">
                 <input type="text" v-model="note.info.txt" placeholder="Take a note..."/>
+                <div >
+                    <ul v-for="(label, idx) in note.labels" class="labels-container">
+                        <li class="note-label" :style="{'background-color': label.color}" @mouseover="isLabel=true" @mouseout="isLabel=false">
+                            {{label.name}}
+                            <i v-show="isLabel" @click="removeLabel(note.id, idx)" class="fas fa-times fa-xs"></i>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div v-if="note.type === 'noteImg' || note.type === 'noteVideo'">
                 <input type="text" v-model="note.info.txt" placeholder="Take a note..."/>
                 <input type="text" v-model="note.info.url" :placeholder="placeholderText"/>
+                <div >
+                    <ul v-for="(label, idx) in note.labels" class="labels-container">
+                        <li class="note-label" :style="{'background-color': label.color}" @mouseover="isLabel=true" @mouseout="isLabel=false">
+                            {{label.name}}
+                            <i v-show="isLabel" @click="removeLabel(note.id, idx)" class="fas fa-times fa-xs"></i>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div v-if="note.type === 'noteTodos'">
                 <div class="todoList" style="display:flex; flex-direction:column;">
@@ -25,6 +41,14 @@ export default {
                     </div>
                     <input v-for="todo in note.info.todos" type="text" :value="todo.txt" @keyup.enter="addTask" placeholder="New task">
                 </div>
+                <div >
+                <ul v-for="(label, idx) in note.labels" class="labels-container">
+                    <li class="note-label" :style="{'background-color': label.color}" @mouseover="isLabel=true" @mouseout="isLabel=false">
+                        {{label.name}}
+                        <i v-show="isLabel" @click="removeLabel(note.id, idx)" class="fas fa-times fa-xs"></i>
+                    </li>
+                </ul>
+            </div>
             </div>
             <button @click="saveNote" class="add-btn">{{buttonText}}</button>
         </section>
@@ -32,7 +56,8 @@ export default {
     data() {
         return {
             note: null,
-            todoTxt: ''
+            todoTxt: '',
+            isLabel: false
         };
     },
     created() {
@@ -74,5 +99,11 @@ export default {
             })
             this.todoTxt = ''
         },
+        removeLabel(noteId, labelIdx) {
+            keepService.removeLabel(noteId, labelIdx)
+                .then(note => {
+                    this.$emit('addNote', note)
+                });
+        }
     }
 }

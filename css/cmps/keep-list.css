@@ -65,7 +65,7 @@
   transition: opacity 200ms ease-in-out;
 }
 
-.dropdown-content {
+.color-dropdown-content {
   width: 7rem;
   position: absolute;
   bottom: 23px;
@@ -78,14 +78,14 @@
   padding: 0.5rem;
 }
 
-.dropdown-content span {
+.color-dropdown-content span {
   width: 20px;
   height: 20px;
   border: 0.5px solid rgb(145, 139, 139);
   border-radius: 50%;
 }
 
-.dropdown-content span:hover {
+.color-dropdown-content span:hover {
   transform: scale(1.2);
 }
 
