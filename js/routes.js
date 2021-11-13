@@ -6,8 +6,7 @@ import emailDetails from './pages/email-details.cmp.js';
 import emailInbox from './cmps/email-inbox.cmp.js';
 import bookApp from './pages/book-app.cmp.js';
 import bookDetails from './pages/book-details.cmp.js';
-// import aboutPage from './pages/about-page.cmp.js';
-// import aboutTeam from './pages/about-team.cmp.js';
+import aboutPage from './pages/about-page.cmp.js';
 
 
 const routes = [
@@ -41,16 +40,10 @@ const routes = [
         path: '/book/:bookId',
         component: bookDetails
     },
-    // {
-    //     path: '/about',
-    //     component: aboutPage,
-    //     children: [
-    //         {
-    //             path: '/about/team',
-    //             component: aboutTeam
-    //         },
-    //     ]
-    // },
+    {
+        path: '/about',
+        component: aboutPage,
+    },
 
 ];
 

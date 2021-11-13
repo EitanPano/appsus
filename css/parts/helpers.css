@@ -19,6 +19,10 @@
     align-items: center;
 }
 
+.flex.row-reverse {
+    flex-direction: row-reverse;
+}
+
 /* text */
 
 .text-left {
