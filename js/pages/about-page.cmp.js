@@ -78,7 +78,7 @@ export default {
                         </li>
                     </ul>
                     <article>
-                        <img src="./img/git_profile.jpg" alt="Check Path">
+                        <img src="./img/photo-adi.jpg" alt="Check Path">
                         <div class="links">
                             <a href="https://www.facebook.com/eitan.pano/" target="blank"><img src="./img/facebook-circled-48.png" alt="Facebook"></a>
                             <a href="https://github.com/eitanpano" target="blank" ><img src="./img/github-50.png" alt="GitHub"></a>
