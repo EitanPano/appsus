@@ -18,7 +18,7 @@ export default {
                     <div class="fas-box" style="font-size: 0.5rem;">
                         <i class="far fa-check-square fa-3x hoverable" title="New list" @click="getNote('noteTodos')"></i>
                         <i class="far fa-images fa-3x hoverable" title="New note with image" @click="getNote('noteImg')"></i>
-                        <i class="fab fa-youtube-square fa-3x hoverable" title="New note with video" @click="getNote('noteVideo')"></i>
+                        <i class="fab fa-youtube fa-3x hoverable" title="New note with video" @click="getNote('noteVideo')"></i>
                     </div>              
                     <div v-if="isClicked" class="keep-edit">
                         <keep-add :type="type"  @addNote="addNote" @close="isClicked=false"/>

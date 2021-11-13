@@ -49,6 +49,7 @@
   position: absolute;
   bottom: 10px;
   display: flex;
+  justify-content: space-between;
   width: inherit;
   padding-inline-end: 1rem;
 }
@@ -60,8 +61,8 @@
 }
 
 .note-preview-container .actions i:hover {
-opacity: 1;
-transition: opacity 200ms ease-in-out;
+  opacity: 1;
+  transition: opacity 200ms ease-in-out;
 }
 
 .dropdown-content {
@@ -87,10 +88,11 @@ transition: opacity 200ms ease-in-out;
 .dropdown-content span:hover {
   transform: scale(1.2);
 }
+
 .actions .right-actions {
   display: flex;
   justify-content: space-evenly;
-  width: 7rem;
+  width: 70%;
 }
 
 .actions .pin-action {

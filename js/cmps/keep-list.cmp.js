@@ -21,7 +21,7 @@ export default {
                     <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"  @mouseover="isColors=false"></i>
                     <div class="right-actions">
                         <i title="Add label" class="fas fa-tag" @mouseover="manageActions"></i>
-                        <i title="Change note color" class="fas fa-palette info colors dropdown" @mouseover="isColors=false">
+                        <i title="Change note color" class="fas fa-palette info colors dropdown" @mouseover="isColors=true">
                             <div class="dropdown-content" v-show="isColors" @mouseout="isColors=false">
                                 <span @click="color(note.id, $event)" class="" style="background-color: #ffffff;"> &nbsp; </span>
                                 <span @click="color(note.id, $event)" class="" style="background-color: #f28b82;"> &nbsp; </span>
@@ -76,8 +76,8 @@ export default {
             this.editedNoteIdx = idx;
         },
         manageActions() {
-            isColors = false;
-            isLabels = true;
+            this.isColors = false;
+            this.isLabels = true;
         },
         composeNote(note) {
             utilService.saveToStorage('noteToCompose', note)
