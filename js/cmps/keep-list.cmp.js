@@ -13,16 +13,29 @@ export default {
         <section class="keep-list">
             <ul class="keep-list-container">
             <li v-for="(note,idx) in notes" :key="note.id" class="note-preview-container" :style="{'background-color': note.style.backgroundColor}"  @mouseover="hoveredNoteIdx = idx" @mouseout="hoveredNoteIdx = -1">
-                <keep-preview :note="note" />
+                <keep-preview :note="note" @removeLabel="removeLabel"/>
                 <div v-if="idx === editedNoteIdx && isEdit" class="keep-edit">
                     <keep-add :noteToEdit="note"  @addNote="addNote" @close="isEdit=false"/>
                 </div>
                 <div class="actions" v-show="idx === hoveredNoteIdx" >
                     <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"  @mouseover="isColors=false"></i>
                     <div class="right-actions">
-                        <i title="Add label" class="fas fa-tag" @mouseover="manageActions"></i>
-                        <i title="Change note color" class="fas fa-palette info colors dropdown" @mouseover="isColors=false">
-                            <div class="dropdown-content" v-show="isColors" @mouseout="isColors=false">
+                        <i title="Add label" class="fas fa-tag" @mouseover="manageActions">
+                            <div class="labels-dropdown-content" v-show="isLabels" @mouseout="isLabels=false" @mouseover="isEdit=true">
+                                <ul>
+                                    <li @click="addLabel(note.id, 'Critical', 'red')" :style="{'background-color': 'red'}">Critical</li>
+                                    <li @click="addLabel(note.id, 'Family', 'blue')" :style="{'background-color': 'blue'}">Family</li>
+                                    <li @click="addLabel(note.id, 'Work', 'green')" :style="{'background-color': 'green'}">Work</li>
+                                    <li @click="addLabel(note.id, 'Friend', 'yellow')" :style="{'background-color': 'yellow'}">Friend</li>
+                                    <li @click="addLabel(note.id, 'Spam', 'orange')" :style="{'background-color': 'orange'}">Spam</li>
+                                    <li @click="addLabel(note.id, 'Memories', 'purple')" :style="{'background-color': 'purple'}">Memories</li>
+                                    <li @click="addLabel(note.id, 'Romantic', 'aquamarine')" :style="{'background-color': 'aquamarine'}">Romantic</li>
+                                </ul>
+                               
+                            </div>
+                        </i>
+                        <i title="Change note color" class="fas fa-palette" @mouseover="isColors=true">
+                            <div class="color-dropdown-content" v-show="isColors" @mouseout="isColors=false" @mouseover="isEdit=true">
                                 <span @click="color(note.id, $event)" class="" style="background-color: #ffffff;"> &nbsp; </span>
                                 <span @click="color(note.id, $event)" class="" style="background-color: #f28b82;"> &nbsp; </span>
                                 <span @click="color(note.id, $event)" class="" style="background-color: #fbbc04;"> &nbsp; </span>
@@ -39,6 +52,7 @@ export default {
                         </i>
                         <i title="Edit note" class="fas fa-edit" @mouseover="isColors=false" @click="openEdit(idx)"></i>    
                         <i title="Compose as Email" @click="composeNote(note)" class="fas fa-paper-plane"></i>
+                        <i title="Duplicate note" class="fas fa-clone" @click="duplicate(note)"></i>
                         <i title="Delete note" class="far fa-trash-alt" @click="remove(note.id)"></i>
                     </div>
                 </div>
@@ -52,7 +66,7 @@ export default {
             editedNoteIdx: -1,
             isEdit: false,
             isColors: false,
-            isLabels: false
+            isLabels: false,
         };
     },
     computed: {},
@@ -68,22 +82,31 @@ export default {
             const color = e.srcElement.style.backgroundColor;
             this.$emit("color", noteId, color);
         },
+        addLabel(noteId, labelName, labelColor){
+            this.$emit('addLabel', noteId, labelName, labelColor)
+        },
         pin(noteId) {
             this.$emit("pin", noteId);
+        },
+        duplicate(note) {
+            this.$emit("duplicate", note);
         },
         openEdit(idx) {
             this.isEdit = true;
             this.editedNoteIdx = idx;
         },
         manageActions() {
-            isColors = false;
-            isLabels = true;
+            this.isColors = false;
+            this.isLabels = true;
         },
         composeNote(note) {
             utilService.saveToStorage('noteToCompose', note)
             this.$router.push('/email')
             // eventBus.$emit('composeNote', note, true)
         },
+        removeLabel(noteId, labelIdx) {
+            this.$emit ('removeLabel', noteId, labelIdx)
+        }
     }
     
 };
