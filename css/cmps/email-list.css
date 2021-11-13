@@ -1,5 +1,4 @@
 .email-list {
-    padding-left: 16em;
     max-width: 100%;
     flex-grow: 1;
 }
@@ -28,7 +27,7 @@
 }
 
 .email-list li {
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.253);
     background-color: #fff;
     white-space: nowrap;
     position: relative;
@@ -50,7 +49,7 @@
     align-items: center;
     justify-content: space-between;
     height: 3em;
-    padding: 0.5em 1em;
+    padding: 0.5em 1em 0.5em 2em;
     font-size: 0.95em;
     overflow: hidden;
 }
@@ -95,3 +94,8 @@
 }
 
 
+@media (min-width: 768px) {
+    .email-list{
+        padding-left: 16em;
+    }
+}

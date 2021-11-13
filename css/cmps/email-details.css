@@ -1,23 +1,49 @@
 .email-details {
-    margin-left: 16em;
-    padding: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+    margin-top: 2.5em;
 }
 
-.email-details > div {
-    /* position: absolute; */
-    margin-top: 3em auto;
+.email-app .email-details > div {
+    margin-top: 1.5em auto;
     padding: 1em 2em;
     max-width: calc(768px - 10em);
     background-color: white;
 }
 
+.email-details .tool-bar {
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+}
+
+.email-details .tool-bar button {
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    padding: 0.5em;
+
+    transition: 0.2s;
+}
+
+.email-details .tool-bar button:hover {
+    background-color: gainsboro;
+}
+
+.email-details .tool-bar p {
+    margin: auto 0;
+    padding-top: 0.25em;
+}
+
 .email-details .back-to {
     color: inherit;
-    font-size: 0.9em;
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    border: none;
+    box-shadow: none;
 }
 
 .email-details .subject {
@@ -39,4 +65,21 @@
     display: block;
     text-align: center;
     margin: 2em auto 0;
+}
+
+.email-details .fa, .email-details .far, .email-details .fas {
+    font-size: 1.5em;
+}
+
+@media (min-width:768px) {
+    .email-details{
+        margin-left: 16em;
+        padding: 2em;
+    }
+}
+
+@media (min-width: 1024px) {
+    .email-app .email-details > div {
+        width: 768px;
+    }
 }

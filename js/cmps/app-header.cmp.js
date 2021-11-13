@@ -4,11 +4,11 @@ export default {
         <h1><a class="logo" href="">Appsus</a></h1>
         <nav>
             <ul class="main-nav" :class="menuOpen" @click="toggleMenu">
-                <li><router-link to="/" exact>Home</router-link></li>
-                <li><router-link to="/email">Mail</router-link></li>
-                <li><router-link to="/keep">Keep</router-link></li>
-                <!-- <li><router-link to="/book">Books</router-link></li> -->
-                <li><router-link to="/about">About</router-link></li>
+                <li><router-link to="/" exact><i class="fas fa-home"></i></router-link></li>
+                <li><router-link to="/email"><i class="far fa-envelope"></i></router-link></li>
+                <li><router-link to="/keep"><i class="far fa-sticky-note"></i></router-link></li>
+                <li><router-link to="/book"><i class="fas fa-book"></i></router-link></li>
+                <li><router-link to="/about"><i class="far fa-address-card"></i></router-link></li>
             </ul>
         </nav>
         <div class="burger-menu" @click="toggleMenu" :class="menuOpen">

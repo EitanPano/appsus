@@ -3,13 +3,13 @@ import { eventBus } from '../services/event-bus-service.js';
 
 export default {
     template: `
-        <main v-if="email" class="app-main email-details">
+        <main v-if="email" class="email-details">
             <div>
-                <div>
+                <div class="tool-bar">
                     <router-link class="back-to" to="/email">
                     <i class="fas fa-long-arrow-alt-left"></i>
                     &nbspBack</router-link>
-                    <div>                   
+                    <div class="tools">                   
                         <button @click.prevent="toggleRead(email.id, email.isRead)"><i :class="readBtn"></i></button>
                         <button @click.prevent="toggleStarred(email.id, email.isStarred)"><i :class="showStarred" aria-hidden="true"></i></button>
                         <button @click.prevent="removeEmail(email.id)"><i class="fas fa-trash"></i></button> 

@@ -1,0 +1,46 @@
+.home-page section {
+    height: 33vh;
+    box-shadow: 0 -5px 0 0 white;
+    max-width: 1024px;
+    margin: 0 auto;
+
+    font-size: 1.7em;
+    font-weight: bold;
+    color: white;
+    -webkit-text-stroke: 1.2px black;
+    text-align: center;
+}
+
+.home-page .home-page-email {
+    background-image: url(../../img/email_app.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.home-page .home-page-note {
+    background-image: url(../../img/notes_app.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.home-page .home-page-book {
+    background-image: url(../../img/books_app.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.home-page section > div {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 2em;
+}
+
+.box-left {
+
+}
