@@ -1,3 +1,6 @@
+// import { eventBus } from '../services/event-bus-service.js';
+import { utilService } from '../services/util-service.js';
+
 import keepPreview from "./keep-preview.cmp.js";
 import keepAdd from "./keep-add.cmp.js";
 
@@ -26,6 +29,7 @@ export default {
                 <div class="actions" v-show="idx === hoveredNoteIdx" >
                     <div class="pin-action">
                         <i title="Pin note" class="fas fa-thumbtack" @click="pin(note.id)"  @mouseover="isColors=false"></i>
+                        <i title="Compose as Email" @click="composeNote(note)" class="fas fa-paper-plane" @mouseover="isColors=false"></i>
                     </div>
                     <div class="right-actions">
                         <i title="Change note color" class="fas fa-palette info colors dropdown" @mouseover="isColors=true">
@@ -76,5 +80,10 @@ export default {
             this.isEdit = true;
             this.editedNoteIdx = idx;
         },
+        composeNote(note) {
+            utilService.saveToStorage('noteToCompose', note)
+            this.$router.push('/email')
+            // eventBus.$emit('composeNote', note, true)
+        }
     },
 };

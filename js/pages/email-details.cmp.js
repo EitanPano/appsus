@@ -12,7 +12,7 @@ export default {
                 <p class="from">{{ email.from}}</p>
                 <p class="body">{{ email.body }}</p>
                 <hr>
-                <img class="img" v-if="email.img" :src="email.img" alt="">
+                <img class="img" v-if="email.imgUrl" :src="email.imgUrl" alt="">
             </div>
         </main>
     `,

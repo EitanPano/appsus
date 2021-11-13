@@ -11,5 +11,4 @@ export default {
             <a href="" @click.prevent="$emit('setStatus', 'trash')"><i class="fas fa-trash"></i>Trash</a>
         </aside>
     `,
-
 };

@@ -1,16 +1,17 @@
 import { emailService } from '../services/email-service.js';
 import { eventBus } from '../services/event-bus-service.js';
+import { utilService } from '../services/util-service.js';
 import emailFilter from './email-filter.cmp.js';
 import emailList from './email-list.cmp.js';
 import emailCompose from './email-compose.cmp.js';
 
 export default {
     template: `
-      <section>
-      <email-filter @changed="setFilter" />
+    <section>
+        <email-filter @changed="setFilter" />
         <email-list @toggleStarred="toggleStarred" @toggleRead="toggleRead" @removed="removeEmail" v-if="emails" :emails="emails" />
-        <email-compose v-if="isCompose" @sent="sendEmail" @closed="isCompose = false" />
-      </section>`,
+        <email-compose v-if="isCompose" :note="note" @sent="sendEmail" @closed="isCompose = false" />
+    </section>`,
     data() {
         return {
             emails: null,
@@ -21,17 +22,19 @@ export default {
                 lables: [],
             },
             isCompose: false,
+            note: utilService.loadFromStorage('noteToCompose') || null
         };
     },
     created() {
         this.loadEmails();
-        eventBus.$on('toggleCompose', (isCompose) => {
-            this.isCompose = isCompose;
+        eventBus.$on('toggleCompose', () => {
+            this.isCompose = !this.isCompose;
         });
         eventBus.$on('setStatus', (status) => {
             this.filterBy.status = status;
             this.loadEmails();
         });
+        if (this.note) this.isCompose = !this.isCompose
     },
     watch: {
         '$route.params.mailStatus'(mailStatus) {
@@ -49,13 +52,15 @@ export default {
             newEmail.from = emailService.loggedinUser.email;
             emailService.sendEmail(newEmail).then((emails) => {
                 console.log('emails', emails);
+                utilService.saveToStorage('noteToCompose', null)
+                this.note = null;
                 this.emails = emails;
+                this.isCompose = !this.isCompose
             });
         },
         removeEmail(emailId) {
             if (this.filterBy.status !== 'trash') {
-                emailService.trashEmail(emailId)
-                .then(res => {
+                emailService.trashEmail(emailId).then((res) => {
                     this.loadEmails();
                 });
             } else

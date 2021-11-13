@@ -22,15 +22,15 @@ export default {
     data() {
         return {
             status: 'inbox',
-            isCompose: null,
+            // isCompose: null,
         };
     },
     created() {
     },
     methods: {
         toggleCompose(){
-            this.isCompose = !this.isCompose
-            eventBus.$emit('toggleCompose',this.isCompose)
+            // this.isCompose = !this.isCompose
+            eventBus.$emit('toggleCompose')
         },
         setStatus(status) {
             // not working when first, but if last then vue wont render?
