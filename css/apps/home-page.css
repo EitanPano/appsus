@@ -1,14 +1,23 @@
 .home-page section {
     height: 33vh;
-    box-shadow: 0 -5px 0 0 white;
+    border-bottom: 10px solid white;
     max-width: 1024px;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    font-size: 1.7em;
+    font-size: 1.05em;
     font-weight: bold;
     color: white;
-    -webkit-text-stroke: 1.2px black;
-    text-align: center;
+    -webkit-text-stroke: 1px rgb(90, 90, 90);
+    padding: 1em;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.home-page section:hover {
+    opacity: 1;
 }
 
 .home-page .home-page-email {
@@ -16,7 +25,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 .home-page .home-page-note {
@@ -24,6 +32,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    flex-direction: row-reverse;
 }
 
 .home-page .home-page-book {
@@ -35,12 +44,47 @@
 
 .home-page section > div {
     width: 75%;
+    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    line-height: 2em;
+    line-height: 1.2em;
 }
 
-.box-left {
+.home-page section img {
+    max-width: 100%;
+    max-height: 25vh;
+}
 
+.home-page section a {
+    transition: 0.3s;
+    margin: 1em;
+    width: 25%;
+}
+.home-page .home-page-book a {
+    padding-top: 1em;
+    margin: 0;
+    width: 30%;
+}
+
+.home-page section a:hover {
+    transform: scale(1.2);
+}
+
+@media (min-width:480px) {
+    .home-page section {
+        font-size: 1.4em;
+    }
+}
+
+@media (min-width:768px) {
+    .home-page section {
+        font-size: 1.8em;
+    }
+    .home-page section > div {
+        width: 65%;
+        max-height: 100%;
+        display: flex;
+        align-items: center;
+        line-height: 1.5em;
+    }
 }

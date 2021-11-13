@@ -1,9 +1,11 @@
 @import './parts/helpers.css';
 @import './cmps/app-header.css';
+@import './cmps/app-footer.css';
 @import './apps/home-page.css';
 @import './apps/email-app.css';
 @import './apps/keep-app.css';
 @import './apps/book-app.css';
+@import './apps/about-page.css';
 
 
 
