@@ -4,10 +4,9 @@
     top: 3vh;
     left: calc(50% - 10em);
     z-index: 250;
-
     box-shadow: 0 0 5px 0;
     border-radius: 0.5em;
-    margin: 0.5em 1.3em 0;
+    margin: 7em 1.3em 0;
 }
 
 .keep-search input:focus {

@@ -95,8 +95,7 @@ export default {
             <div >
                 <ul  class="labels-container">
                     <li v-for="(label, idx) in note.labels" class="note-label" :style="{'background-color': label.color}" 
-                        @mouseover="isLabel=true; labelIdx = idx" @mouseout="isLabel=false; labelIdx = -1">
-                        {{label.name}}
+                        @mouseover="isLabel=true; labelIdx = idx" @mouseout="isLabel=false; labelIdx = -1">{{label.name}}
                         <i v-show="isLabel && labelIdx === idx" @click="removeLabel(note.id, idx)" class="fas fa-times fa-xs"></i>
                     </li>
                 </ul>

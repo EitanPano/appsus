@@ -70,7 +70,7 @@ function composeEmail(email) {
             txt: `from: ${email.from}
             To: ${email.to}
             Sent at: ${_showSentAt(email.sentAt)}
-            ${email.body}` 
+            ${email.body}`
         },
         labels: [],
         style: {
@@ -99,10 +99,8 @@ function changeColor(noteId, color) {
 }
 
 function addLabel(noteId, labelName, labelColor) {
-    console.log(noteId);
     return getById(noteId)
         .then(note => {
-            console.log(note);
             note.labels.push({ name: labelName, color: labelColor })
             return storageService.put(KEEP_KEY, note);
         });
@@ -191,21 +189,103 @@ function _createNotes() {
     if (!notes || !notes.length) {
         notes = [
             {
-                id: "n101",
+                id: "n106",
+                type: "noteImg",
+                isPinned: true,
+                info: {
+                    url: "https://media.giphy.com/media/tVXqVRdInsRIajEqKp/giphy.gif",
+                    title: "coding",
+                    txt: ""
+                },
+                labels: [],
+                style: {
+                    backgroundColor: "#ccff90"
+                }
+            },
+            {
+                id: "n104",
                 type: "noteTxt",
                 isPinned: true,
                 info: {
-                    title: "I am type txt",
+                    title: "Hi",
+                    txt: "We did it!"
+                },
+                labels: [
+                    {
+                        name: "Memories",
+                        color: "#c377e0"
+                    }
+                ],
+                style: {
+                    backgroundColor: "#a7ffeb"
+                }
+            },
+            {
+                id: "n105",
+                type: "noteImg",
+                isPinned: false,
+                info: {
+                    url: "https://images.freeimages.com/images/small-previews/25a/pink-heart-of-stone-1316358.jpg",
+                    title: "Inspo",
+                    txt: ""
+                },
+                labels: [],
+                style: {
+                    backgroundColor: "#fdcfe8"
+                }
+            },
+            {
+                id: "n108",
+                type: "noteVideo",
+                isPinned: false,
+                info: {
+                    url: "https://www.youtube.com/embed/tgbNymZ7vqY",
+                    title: ":)",
+                    txt: "love this song"
+                },
+                labels: [
+                    {
+                        name: "Romantic",
+                        color: "#17a2b8"
+                    }
+                ],
+                style: {
+                    backgroundColor: "#fff475"
+                }
+            },
+            {
+                id: "n107",
+                type: "noteTodos",
+                isPinned: false,
+                info: {
+                    title: "Things to buy",
+                    todos: [
+                        { txt: "clothes", isCompleted: false },
+                        { txt: "shoes", isCompleted: false },
+                        { txt: "bags", isCompleted: true }
+                    ]
+                },
+                labels: [],
+                style: {
+                    backgroundColor: "#d7aefb"
+                }
+            },
+            {
+                id: "n101",
+                type: "noteTxt",
+                isPinned: false,
+                info: {
+                    title: "Hell yeah",
                     txt: "Fullstack Me Baby!"
                 },
                 labels: [
                     {
-                        name: "later",
-                        color: "#aecbfa"
+                        name: "Work",
+                        color: "#61bd4f"
                     },
                     {
-                        name: "important",
-                        color: "#aecbfa"
+                        name: "Critical",
+                        color: "#eb5a46"
                     }
                 ],
                 style: {
@@ -215,18 +295,13 @@ function _createNotes() {
             {
                 id: "n102",
                 type: "noteImg",
-                isPinned: false,
+                isPinned: true,
                 info: {
                     url: "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg",
-                    title: "I am type img",
-                    txt: ""
+                    title: "flower",
+                    txt: "Love this image..."
                 },
-                labels: [
-                    {
-                        name: "Inspo",
-                        color: "#aecbfa"
-                    }
-                ],
+                labels: [],
                 style: {
                     backgroundColor: "#fbbc04"
                 }
@@ -236,7 +311,7 @@ function _createNotes() {
                 type: "noteTodos",
                 isPinned: false,
                 info: {
-                    title: "I am type todos",
+                    title: "To-do",
                     todos: [
                         { txt: "Driving liscence", isCompleted: false },
                         { txt: "Coding power", isCompleted: true }
@@ -246,6 +321,20 @@ function _createNotes() {
                 style: {
                     backgroundColor: "#f28b82"
                 }
+            },
+            {
+                id: "n109",
+                type: "noteImg",
+                isPinned: false,
+                info: {
+                    url: "https://media.giphy.com/media/46RrPTYlYIemQ/giphy.gif",
+                    title: "funny",
+                    txt: "family guy"
+                },
+                labels: [],
+                style: {
+                    backgroundColor: "#ccff90"
+                }
             }
         ];
         utilService.saveToStorage(KEEP_KEY, notes);
@@ -253,15 +342,8 @@ function _createNotes() {
     return notes;
 }
 
-function _createNote(vendor, maxSpeed = 250) {
-    const note = {
-        id: utilService.makeId(),
-        vendor,
-        maxSpeed,
-    };
-    return note;
-}
-
 function _showSentAt(date) {
     return new Date(date).toLocaleDateString();
 }
+
+        

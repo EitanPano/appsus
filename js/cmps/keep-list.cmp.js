@@ -26,7 +26,7 @@ export default {
                                     <li @click="addLabel(note.id, 'Critical', '#eb5a46')" :style="{'background-color': '#eb5a46'}">Critical</li>
                                     <li @click="addLabel(note.id, 'Family', '#0079bf')" :style="{'background-color': '#0079bf'}">Family</li>
                                     <li @click="addLabel(note.id, 'Work', '#61bd4f')" :style="{'background-color': '#61bd4f'}">Work</li>
-                                    <li @click="addLabel(note.id, 'Friend', '#f2d600')" :style="{'background-color': '#f2d600'}">Friend</li>
+                                    <li @click="addLabel(note.id, 'Friends', '#f2d600')" :style="{'background-color': '#f2d600'}">Friends</li>
                                     <li @click="addLabel(note.id, 'Spam', '#ff9f1a')" :style="{'background-color': '#ff9f1a'}">Spam</li>
                                     <li @click="addLabel(note.id, 'Memories', '#c377e0')" :style="{'background-color': '#c377e0'}">Memories</li>
                                     <li @click="addLabel(note.id, 'Romantic', '#17a2b8')" :style="{'background-color': '#17a2b8'}">Romantic</li>
