@@ -3,16 +3,15 @@
     position: fixed;
     bottom: 0;
     right: 0;
-
-    width: 50vw;
-    max-width: 35em;
-    height: 50vw;
-    max-height: 35em;
+    width: 100%;
+    height: 40vh;
     border-radius: 1.5em 0 0 0;
+    z-index: 200;
 }
 
 .email-compose .upper-tab {
-    background-color: gainsboro;
+    background-color: rgb(139, 139, 139);
+    color: white;
     padding: 0 0 0 1.5em;
     font-weight: bold;
     font-size: 0.9em;
@@ -28,7 +27,7 @@
     background-color: transparent;
 }
 
-.email-compose input[type='text'] {
+.email-compose input[type='text'], .email-compose input[type='email'], .email-compose input[type='url'] {
     width: 100%;
     border:none;
     margin: 5px;
@@ -37,12 +36,48 @@
     box-shadow: none;
 }
 
-
 .email-compose textarea {
     width: 100%;
     height: 100%;
     border: none;
+    resize: none;
     padding: 0.5em 0.5em 0.5em 1em;
     font-size: 1em;
     outline: none;
+}
+
+.email-compose .actions {
+    display: flex;
+    align-items: flex-end;
+    position: absolute;
+    justify-content: space-between;
+    align-items: flex-end;
+    bottom: 1em;
+    left: 1em;
+}
+
+.email-compose button {
+    min-width: 48px;
+    height: 48px;
+    margin-right: 1em;
+}
+
+.email-compose .btn-send {
+    min-width: 96px;
+    background-color: rgb(124, 192, 255);
+    border: none;
+    border-radius: 0.5em;
+}
+
+.email-compose button >i {
+    font-size: 1.5em;
+}
+
+@media (min-width: 768px) {
+    .email-compose {
+        width: 50vw;
+        max-width: 35em;
+        height: 50vw;
+        max-height: 35em;
+    }
 }

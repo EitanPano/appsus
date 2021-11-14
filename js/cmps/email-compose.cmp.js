@@ -9,11 +9,13 @@ export default {
         <form action="" @submit.prevent="sendEmail">
             <input v-model="newEmail.to" type="email" placeholder="Recipient@mail.com">
             <input v-model="newEmail.subject" type="text" placeholder="Subject">
-            <textarea v-model="newEmail.body" name="" id=""></textarea>
-            <div class="actions">
-                <button type="button" title="Attach Image" @click.prevent="toggleAttach"><i class="fas fa-paperclip"></i></button>
-                <input @input="testLog" v-model="newEmail.imgUrl" v-if="isAttached" type="url" placeholder="Image Url">
-                <button type="submit">Send</button>
+            <div class="flex-fix">
+                <textarea v-model="newEmail.body" name="" id=""></textarea>
+                <div class="actions">
+                    <button class="btn-attach" type="button" title="Attach Image" @click.prevent="toggleAttach"><i class="fas fa-paperclip"></i></button>
+                    <input @input="testLog" v-model="newEmail.imgUrl" v-if="isAttached" type="url" placeholder="Image Url">
+                    <button class="btn-send" type="submit">Send</button>
+                </div>
             </div>
         </form>
     </section>
