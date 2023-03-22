@@ -1,4 +1,4 @@
-### Introduction
+## Introduction
 Appsus is a web application that comprises three different applications: a Google Keep-like app, a Gmail-like app, and a Bookstore app. This application is developed using JavaScript and Vue.js framework with the Model-View-Controller (MVC) pattern for each app.
 
 ### Google Keep-like app
